@@ -1,0 +1,56 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: assets/uploads
+public_folder: /assets/uploads
+
+collections:
+  - name: "pages"
+    label: "Pages"
+    files:
+      - label: "Home Page"
+        name: "home"
+        file: "_content/home.json"
+        fields:
+          - { label: "Hero Headline", name: "hero_headline", widget: "string" }
+          - { label: "Hero Subline", name: "hero_subline", widget: "string" }
+          - { label: "Statement Text", name: "statement", widget: "text" }
+          - { label: "CTA Headline", name: "cta_headline", widget: "string" }
+
+      - label: "About Page"
+        name: "about"
+        file: "_content/about.json"
+        fields:
+          - { label: "Headline", name: "headline", widget: "string" }
+          - { label: "Bio Text", name: "bio", widget: "text" }
+
+      - label: "HER Console Project"
+        name: "her_console"
+        file: "_content/her-console.json"
+        fields:
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Description", name: "description", widget: "text" }
+          - { label: "Material", name: "material", widget: "string" }
+          - { label: "Finish", name: "finish", widget: "string" }
+          - { label: "Feature", name: "feature", widget: "string" }
+          - label: "Story"
+            name: "story"
+            widget: "list"
+            field: { label: "Paragraph", name: "paragraph", widget: "text" }
+
+  - name: "work"
+    label: "Work / Projects"
+    folder: "_content/projects"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Category", name: "category", widget: "string" }
+      - { label: "Location", name: "location", widget: "string" }
+      - { label: "Description", name: "description", widget: "text" }
+      - { label: "Cover Image", name: "cover", widget: "image" }
+      - label: "Photos"
+        name: "photos"
+        widget: "list"
+        field: { label: "Photo", name: "photo", widget: "image" }

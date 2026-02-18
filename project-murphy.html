@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jenna & Bobby — Wewillbebirds</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Project hero */
+    .project-hero {
+      position: relative;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+    }
+    .project-hero-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+    .project-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(8,8,8,0.1) 0%, rgba(8,8,8,0.75) 100%);
+    }
+    .project-hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 0 48px 80px;
+    }
+    .project-tag {
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+    .project-hero-title {
+      font-family: var(--font-serif);
+      font-size: clamp(40px, 6vw, 72px);
+      font-weight: 400;
+      line-height: 1.05;
+      margin-bottom: 20px;
+    }
+    .project-meta {
+      display: flex;
+      gap: 40px;
+    }
+    .project-meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .project-meta-label {
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(245,242,237,0.4);
+    }
+    .project-meta-value {
+      font-size: 13px;
+      color: var(--white-dim);
+    }
+
+    /* Photo grid */
+    .photo-grid {
+      display: grid;
+      gap: 3px;
+    }
+    .photo-grid--2col { grid-template-columns: 1fr 1fr; }
+    .photo-grid--3col { grid-template-columns: 1fr 1fr 1fr; }
+    .photo-grid--featured { grid-template-columns: 2fr 1fr; }
+    .photo-item {
+      overflow: hidden;
+      background: var(--card);
+    }
+    .photo-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease;
+    }
+    .photo-item:hover img { transform: scale(1.02); }
+    .photo-item--tall { aspect-ratio: 3/4; }
+    .photo-item--wide { aspect-ratio: 16/9; }
+    .photo-item--square { aspect-ratio: 1; }
+    .photo-item--auto { aspect-ratio: 4/3; }
+
+    /* Story section */
+    .story-section {
+      padding: 120px 0;
+    }
+    .story-inner {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 48px;
+    }
+    .story-label {
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 40px;
+    }
+    .story-text {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 1.85;
+      color: var(--white-dim);
+    }
+    .story-text p {
+      margin-bottom: 1.6em;
+    }
+    .story-text p:first-child {
+      font-size: 24px;
+      color: var(--white);
+    }
+
+    /* Nav back */
+    .project-nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 28px 48px;
+      background: linear-gradient(to bottom, rgba(8,8,8,0.85) 0%, transparent 100%);
+    }
+    .project-nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--font-serif);
+      font-size: 18px;
+      color: var(--white);
+      text-decoration: none;
+    }
+    .project-nav-logo img {
+      height: 26px;
+      filter: invert(1);
+      opacity: 0.9;
+    }
+    .project-nav-back {
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--white-dim);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .project-nav-back:hover { color: var(--white); }
+
+    @media (max-width: 768px) {
+      .project-hero-content { padding: 0 24px 60px; }
+      .project-meta { gap: 24px; flex-wrap: wrap; }
+      .photo-grid--2col, .photo-grid--3col, .photo-grid--featured { grid-template-columns: 1fr; }
+      .story-inner { padding: 0 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="project-nav">
+    <a href="index.html" class="project-nav-logo">
+      <img src="assets/logo.png" alt="Wewillbebirds" />
+      Wewillbebirds
+    </a>
+    <a href="work.html" class="project-nav-back">← All work</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="project-hero">
+    <img src="assets/murphy-bed/Jenna-Hero2.jpg" alt="Murphy bed — Jenna & Bobby" class="project-hero-img" />
+    <div class="project-hero-overlay"></div>
+    <div class="project-hero-content">
+      <p class="project-tag">Murphy Bed · Brooklyn</p>
+      <h1 class="project-hero-title">Jenna & Bobby</h1>
+      <div class="project-meta">
+        <div class="project-meta-item">
+          <span class="project-meta-label">Location</span>
+          <span class="project-meta-value">Brooklyn, New York</span>
+        </div>
+        <div class="project-meta-item">
+          <span class="project-meta-label">Material</span>
+          <span class="project-meta-value">White oak</span>
+        </div>
+        <div class="project-meta-item">
+          <span class="project-meta-label">Scope</span>
+          <span class="project-meta-value">Murphy bed + storage</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PHOTO BLOCK 1 -->
+  <div class="photo-grid photo-grid--featured">
+    <div class="photo-item photo-item--tall">
+      <img src="assets/murphy-bed/Jenna1.jpg" alt="" />
+    </div>
+    <div class="photo-grid" style="display:grid;grid-template-rows:1fr 1fr;gap:3px;">
+      <div class="photo-item">
+        <img src="assets/murphy-bed/Jenna2.jpg" alt="" />
+      </div>
+      <div class="photo-item">
+        <img src="assets/murphy-bed/Jenna3.jpg" alt="" />
+      </div>
+    </div>
+  </div>
+
+  <!-- STORY -->
+  <section class="story-section">
+    <div class="story-inner">
+      <p class="story-label">The Story</p>
+      <div class="story-text">
+        <p>I like good stories. This one starts with COVID.</p>
+        <p>The moment New York went quiet in a way that felt impossible. The city didn't die, not even close, but it did something unfamiliar: it held its breath. People ran. Some fled to the suburbs, some disappeared to other states, some simply vanished into the idea that life could be easier somewhere else. For a while, it almost looked like the end of an era.</p>
+        <p>And then there were the ones who did the opposite.</p>
+        <p>There was Jenna and Bobby who moved in during COVID. They showed up when the streets were empty, when storefronts were boarded up, when everyone else was leaving. Not exactly a "New York dream" moment. They dragged boxes up a stairwell, signed papers with masks on, and stepped into their new apartment with a strange feeling of starting a life in the middle of something ending.</p>
+        <p>Their first weeks in New York were the version no one puts on Instagram. The building felt too quiet. The city outside the window looked like an empty movie set. But Jenna and Bobby stayed. They learned the exact sound of each other's silence. They fought over stupid things and made up over even smaller ones. Sometimes they laughed like kids, because if you don't laugh in a storm, you start believing the storm is all there is.</p>
+        <p>And being part of that, even in a small way, made me realize something. I didn't just build a piece for them. I helped build a tiny part of their New York story.</p>
+        <p>Because the truth is, I'm always trying to figure out what the point of it all is. I keep trying to name it like it's a tool on a shelf. Purpose. Meaning. The reason. Something solid enough to hold in your hands. Maybe there isn't one. Maybe life is exactly what it looks like: brief, beautiful, brutally temporary. A match struck in the dark. A breath you didn't know you were holding until you finally let it go.</p>
+        <p>But even if it's temporary, I still catch myself hoping it stays for some time. That when I'm gone, someone will still touch something I built. Open it. Lean on it. Put their keys on it without thinking. Live with it like it's always been there.</p>
+        <p>From the moment I landed in NYC, I've been in love with the people who live in this place. Everyone who comes here has a story. Everyone arrives with reasons and dreams, even if they pretend they don't. Some people chase success. Some people chase escape. Some people chase love. Some people chase a version of themselves they can't become anywhere else.</p>
+        <p>New York doesn't care what your reason is. New York just asks if you can survive your own ambition.</p>
+        <p>It's hard here. It's exhausting. It can feel like you're constantly proving you deserve to exist. You pay for every inch. Not just in rent, but in energy, in patience, in time. The city will take everything you're willing to give. And somehow… we stay.</p>
+        <p>Maybe that's what makes us New Yorkers. Not the confidence, not the outfits, not the attitude. That part is just armor. The real thing is simpler: We're the ones who didn't leave.</p>
+        <p>And here's something I don't think people say enough: New York isn't built by the famous. It's built by everyone who refuses to disappear. The couple that stayed through the silence. The nurse walking home at dawn. The dishwasher taking the train at midnight. The immigrant carrying their whole life in a suitcase. The artist, the carpenter, the driver, the bartender, the teacher. All of us building something that holds, even for a moment.</p>
+        <p>And maybe purpose isn't some grand revelation. Maybe it isn't a single sentence you find and then your life makes sense forever. Maybe purpose is smaller than that. Maybe it's leaving a mark you didn't have to leave, and leaving it well. Maybe it's becoming part of the city's nervous system, quietly, honestly, through work that lasts longer than your mood.</p>
+        <p>Maybe purpose is walking down a street and knowing the city remembers you, even if it doesn't know your name. Because somewhere behind a window, in a home full of ordinary life, there's a piece of you doing its job.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PHOTO BLOCK 2 -->
+  <div class="photo-grid photo-grid--3col">
+    <div class="photo-item photo-item--auto">
+      <img src="assets/murphy-bed/Jenna4.jpg" alt="" />
+    </div>
+    <div class="photo-item photo-item--auto">
+      <img src="assets/murphy-bed/Jenna5.jpg" alt="" />
+    </div>
+    <div class="photo-item photo-item--auto">
+      <img src="assets/murphy-bed/Jenna7.jpg" alt="" />
+    </div>
+  </div>
+
+  <div class="photo-grid photo-grid--2col" style="margin-top:3px">
+    <div class="photo-item photo-item--wide">
+      <img src="assets/murphy-bed/Jenna11.jpg" alt="" />
+    </div>
+    <div class="photo-item photo-item--wide">
+      <img src="assets/murphy-bed/Jenna-Hero2.jpg" alt="" />
+    </div>
+  </div>
+
+  <!-- NEXT PROJECT / CTA -->
+  <section class="cta">
+    <div class="container">
+      <h2 class="cta-headline">Have a project<br /><em>in mind?</em></h2>
+      <p class="cta-sub">We work with a limited number of clients at a time.</p>
+      <a href="contact.html" class="btn-primary">Get in touch</a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span class="footer-logo">Wewillbebirds</span>
+      <div class="footer-links">
+        <a href="https://instagram.com/wewillbebirds" target="_blank">Instagram</a>
+        <a href="mailto:nikolay@wewillbebirds.com">Email</a>
+      </div>
+      <span class="footer-copy">© 2026 Wewillbebirds Inc. Brooklyn, NY</span>
+    </div>
+  </footer>
+
+</body>
+</html>

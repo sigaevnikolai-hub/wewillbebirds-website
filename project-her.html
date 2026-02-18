@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HER Console — Wewillbebirds</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .project-hero {
+      position: relative;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+    }
+    .project-hero-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 30%;
+    }
+    .project-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(8,8,8,0.05) 0%, rgba(8,8,8,0.8) 100%);
+    }
+    .project-hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 0 48px 80px;
+    }
+    .project-tag {
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+    .project-hero-title {
+      font-family: var(--font-serif);
+      font-size: clamp(40px, 6vw, 72px);
+      font-weight: 400;
+      line-height: 1.05;
+      margin-bottom: 20px;
+    }
+    .project-meta {
+      display: flex;
+      gap: 40px;
+    }
+    .project-meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .project-meta-label {
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(245,242,237,0.4);
+    }
+    .project-meta-value {
+      font-size: 13px;
+      color: var(--white-dim);
+    }
+
+    /* Photo layouts */
+    .photo-grid { display: grid; gap: 3px; }
+    .photo-grid--2col { grid-template-columns: 1fr 1fr; }
+    .photo-grid--3col { grid-template-columns: 1fr 1fr 1fr; }
+    .photo-grid--left-heavy { grid-template-columns: 3fr 2fr; }
+    .photo-item { overflow: hidden; background: var(--card); }
+    .photo-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s ease; }
+    .photo-item:hover img { transform: scale(1.02); }
+    .photo-item--tall { aspect-ratio: 3/4; }
+    .photo-item--wide { aspect-ratio: 16/9; }
+    .photo-item--square { aspect-ratio: 1; }
+    .photo-item--auto { aspect-ratio: 4/3; }
+    .photo-item--portrait { aspect-ratio: 2/3; }
+    .photo-full { width: 100%; }
+    .photo-full img { width: 100%; max-height: 85vh; object-fit: cover; display: block; }
+
+    /* Story */
+    .story-section { padding: 120px 0; }
+    .story-inner { max-width: 680px; margin: 0 auto; padding: 0 48px; }
+    .story-label {
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 40px;
+    }
+    .story-text {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 1.85;
+      color: var(--white-dim);
+    }
+    .story-text p { margin-bottom: 1.6em; }
+    .story-text p:first-child { font-size: 26px; color: var(--white); font-style: italic; }
+
+    /* Nav */
+    .project-nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 28px 48px;
+      background: linear-gradient(to bottom, rgba(8,8,8,0.85) 0%, transparent 100%);
+    }
+    .project-nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--font-serif);
+      font-size: 18px;
+      color: var(--white);
+      text-decoration: none;
+    }
+    .project-nav-logo img { height: 26px; filter: brightness(0) invert(1); opacity: 0.9; }
+    .project-nav-back {
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--white-dim);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .project-nav-back:hover { color: var(--white); }
+
+    /* Detail callout */
+    .detail-callout {
+      padding: 80px 48px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .detail-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 48px;
+      border-top: 1px solid var(--border);
+      padding-top: 48px;
+    }
+    .detail-item {}
+    .detail-label {
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--white-muted);
+      margin-bottom: 10px;
+    }
+    .detail-value {
+      font-family: var(--font-serif);
+      font-size: 17px;
+      color: var(--white-dim);
+      line-height: 1.5;
+    }
+
+    @media (max-width: 768px) {
+      .project-hero-content { padding: 0 24px 60px; }
+      .project-meta { gap: 20px; flex-wrap: wrap; }
+      .photo-grid--2col, .photo-grid--3col, .photo-grid--left-heavy { grid-template-columns: 1fr; }
+      .story-inner { padding: 0 24px; }
+      .detail-callout { padding: 60px 24px; }
+      .detail-grid { grid-template-columns: 1fr; gap: 28px; }
+      .project-nav { padding: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="project-nav">
+    <a href="index.html" class="project-nav-logo">
+      <img src="assets/logo.png" alt="Wewillbebirds" />
+      Wewillbebirds
+    </a>
+    <a href="work.html" class="project-nav-back">← All work</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="project-hero">
+    <img src="assets/her/install/her-10.jpg" alt="HER Console" class="project-hero-img" />
+    <div class="project-hero-overlay"></div>
+    <div class="project-hero-content">
+      <p class="project-tag">Console · Manhattan</p>
+      <h1 class="project-hero-title">HER Console</h1>
+      <div class="project-meta">
+        <div class="project-meta-item">
+          <span class="project-meta-label">Material</span>
+          <span class="project-meta-value">Lacquered MDF</span>
+        </div>
+        <div class="project-meta-item">
+          <span class="project-meta-label">Top</span>
+          <span class="project-meta-value">Glass</span>
+        </div>
+        <div class="project-meta-item">
+          <span class="project-meta-label">Feature</span>
+          <span class="project-meta-value">Painted interiors, brass trim, fluted fronts</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PHOTO BLOCK 1 — dramatic side view -->
+  <div class="photo-full">
+    <img src="assets/her/install/her-03.jpg" alt="HER Console — NYC skyline" />
+  </div>
+
+  <!-- STORY -->
+  <section class="story-section">
+    <div class="story-inner">
+      <p class="story-label">The Story</p>
+      <div class="story-text">
+        <p>I don't really have project favorites. But some leave a dent in my heart. This one is that.</p>
+        <p>From the first drawing to the final install, I was excited to make it real. I believe results like this only happen when client and builder truly understand each other — when there's trust, freedom, and real communication on both sides.</p>
+        <p>Smooth and sleek on the outside. Fun and rich on the inside — like a well-tailored Paul Smith suit.</p>
+        <p>And a huge mirror with a precise cutout to fit the console. No buttons. Light appears with a glide of your hand along the curve. All sensors hidden, tracking motion in silence.</p>
+        <p>Really proud of this one. Will miss her.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- DETAIL CALLOUT -->
+  <div class="detail-callout">
+    <div class="detail-grid">
+      <div class="detail-item">
+        <p class="detail-label">The exterior</p>
+        <p class="detail-value">Fluted lacquered fronts. Glass top. Every surface flush — nothing interrupts the line.</p>
+      </div>
+      <div class="detail-item">
+        <p class="detail-label">The mirror</p>
+        <p class="detail-value">Custom cutout to the millimeter. The console and mirror read as one object.</p>
+      </div>
+      <div class="detail-item">
+        <p class="detail-label">The interior</p>
+        <p class="detail-value">Hand-painted drawer boxes. Brass inlay trim. A private world inside a composed exterior.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHOTO BLOCK 2 — exterior details -->
+  <div class="photo-grid photo-grid--left-heavy">
+    <div class="photo-item photo-item--tall">
+      <img src="assets/her/install/her-06.jpg" alt="" />
+    </div>
+    <div class="photo-grid" style="display:grid;grid-template-rows:1fr 1fr;gap:3px;">
+      <div class="photo-item">
+        <img src="assets/her/install/her-09.jpg" alt="" />
+      </div>
+      <div class="photo-item">
+        <img src="assets/her/install/her-07.jpg" alt="" />
+      </div>
+    </div>
+  </div>
+
+  <!-- PHOTO BLOCK 3 — three views -->
+  <div class="photo-grid photo-grid--3col" style="margin-top:3px">
+    <div class="photo-item photo-item--square">
+      <img src="assets/her/install/her-01.jpg" alt="" />
+    </div>
+    <div class="photo-item photo-item--square">
+      <img src="assets/her/install/her-08.jpg" alt="" />
+    </div>
+    <div class="photo-item photo-item--square">
+      <img src="assets/her/install/her-02.jpg" alt="" />
+    </div>
+  </div>
+
+  <!-- INTERIOR REVEAL -->
+  <div class="photo-full" style="margin-top:3px">
+    <img src="assets/her/install/her-12.jpg" alt="HER Console — interior" />
+  </div>
+
+  <!-- PHOTO BLOCK 4 — drawer details -->
+  <div class="photo-grid photo-grid--2col" style="margin-top:3px">
+    <div class="photo-item photo-item--wide">
+      <img src="assets/her/install/her-11.jpg" alt="" />
+    </div>
+    <div class="photo-item photo-item--wide">
+      <img src="assets/her/install/her-13.jpg" alt="" />
+    </div>
+  </div>
+
+  <!-- FINAL FULL WIDTH -->
+  <div class="photo-full" style="margin-top:3px">
+    <img src="assets/her/install/her-05.jpg" alt="HER Console — final" />
+  </div>
+
+  <!-- CTA -->
+  <section class="cta">
+    <div class="container">
+      <h2 class="cta-headline">Have a project<br /><em>in mind?</em></h2>
+      <p class="cta-sub">We work with a limited number of clients at a time.</p>
+      <a href="contact.html" class="btn-primary">Get in touch</a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span class="footer-logo">Wewillbebirds</span>
+      <div class="footer-links">
+        <a href="https://instagram.com/wewillbebirds" target="_blank">Instagram</a>
+        <a href="mailto:nikolay@wewillbebirds.com">Email</a>
+      </div>
+      <span class="footer-copy">© 2026 Wewillbebirds Inc. Brooklyn, NY</span>
+    </div>
+  </footer>
+
+</body>
+</html>

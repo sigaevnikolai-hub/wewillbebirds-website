@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — Wewillbebirds</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .about-wrap { padding: 160px 0; max-width: 1160px; margin: 0 auto; padding-left: 48px; padding-right: 48px; }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 120px; align-items: start; }
+    .about-left {}
+    .about-label { font-size: 10px; font-weight: 400; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 24px; }
+    .about-title { font-family: var(--font-serif); font-size: clamp(36px, 4vw, 54px); font-weight: 400; line-height: 1.1; margin-bottom: 48px; }
+    .about-body { font-size: 16px; color: var(--white-dim); line-height: 1.85; }
+    .about-body p { margin-bottom: 24px; }
+    .about-right { padding-top: 80px; }
+    .about-image { aspect-ratio: 3/4; background: var(--card); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-family: var(--font-serif); font-size: 14px; color: var(--white-muted); letter-spacing: 0.06em; margin-bottom: 48px; }
+    .about-details { border-top: 1px solid var(--border); padding-top: 32px; }
+    .about-detail { display: flex; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid var(--border); }
+    .about-detail-label { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--white-muted); }
+    .about-detail-value { font-size: 13px; color: var(--white-dim); text-align: right; }
+    @media (max-width: 900px) { .about-grid { grid-template-columns: 1fr; gap: 60px; } .about-right { padding-top: 0; } .about-wrap { padding-left: 24px; padding-right: 24px; } }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <a href="index.html" class="nav-logo"><img src="assets/logo.png" alt="Wewillbebirds" />Wewillbebirds</a>
+    <div class="nav-links">
+      <a href="work.html">Work</a>
+      <a href="about.html" style="color:var(--white)">About</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </nav>
+
+  <div class="about-wrap">
+    <div class="about-grid">
+      <div class="about-left">
+        <p class="about-label">The Studio</p>
+        <h1 class="about-title">Built for clients<br />who want a<br /><em>vision.</em></h1>
+        <div class="about-body">
+          <p>
+            Wewillbebirds is a custom millwork studio based in Brooklyn, New York. 
+            We work with homeowners, architects, and designers on residential and 
+            commercial projects across the city.
+          </p>
+          <p>
+            Every piece is built to spec, in-house, with the hardware and finishes 
+            we believe in. We use Blum hardware because it performs. 
+            We finish with Rubio Monocoat and oil-based polyurethane because 
+            anything less isn't something we're willing to deliver.
+          </p>
+          <p>
+            We don't compete on price. We compete on the quality of the result — 
+            and the confidence that the design is right.
+          </p>
+          <p>
+            If you know what you want and you want it done properly, 
+            this is where you should be.
+          </p>
+        </div>
+      </div>
+
+      <div class="about-right">
+        <div class="about-image">Nikolay Sigaev — Portrait</div>
+        <div class="about-details">
+          <div class="about-detail">
+            <span class="about-detail-label">Location</span>
+            <span class="about-detail-value">Brooklyn, New York</span>
+          </div>
+          <div class="about-detail">
+            <span class="about-detail-label">Founded</span>
+            <span class="about-detail-value">Brooklyn, 2020</span>
+          </div>
+          <div class="about-detail">
+            <span class="about-detail-label">Specialties</span>
+            <span class="about-detail-value">Custom millwork, cabinetry,<br />architectural interiors</span>
+          </div>
+          <div class="about-detail">
+            <span class="about-detail-label">Minimum Project</span>
+            <span class="about-detail-value">$8,000</span>
+          </div>
+          <div class="about-detail">
+            <span class="about-detail-label">Service Area</span>
+            <span class="about-detail-value">New York City</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span class="footer-logo">Wewillbebirds</span>
+      <div class="footer-links">
+        <a href="https://instagram.com/wewillbebirds" target="_blank">Instagram</a>
+        <a href="mailto:nikolay@wewillbebirds.com">Email</a>
+      </div>
+      <span class="footer-copy">© 2026 Wewillbebirds Inc. Brooklyn, NY</span>
+    </div>
+  </footer>
+</body>
+</html>
