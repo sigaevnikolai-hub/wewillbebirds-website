@@ -188,7 +188,7 @@
 
   <!-- HERO -->
   <section class="project-hero">
-    <img src="assets/her/install/her-10.jpg" alt="HER Console" class="project-hero-img" />
+    <img id="img-her-hero" src="assets/her/install/her-10.jpg" alt="HER Console" class="project-hero-img" />
     <div class="project-hero-overlay"></div>
     <div class="project-hero-content">
       <p class="project-tag">Console · Manhattan</p>
@@ -212,7 +212,7 @@
 
   <!-- PHOTO BLOCK 1 — dramatic side view -->
   <div class="photo-full">
-    <img src="assets/her/install/her-03.jpg" alt="HER Console — NYC skyline" />
+    <img id="img-her-1" src="assets/her/install/her-03.jpg" alt="HER Console — NYC skyline" />
   </div>
 
   <!-- STORY -->
@@ -250,14 +250,14 @@
   <!-- PHOTO BLOCK 2 — exterior details -->
   <div class="photo-grid photo-grid--left-heavy">
     <div class="photo-item photo-item--tall">
-      <img src="assets/her/install/her-06.jpg" alt="" />
+      <img id="img-her-2" src="assets/her/install/her-06.jpg" alt="" />
     </div>
     <div class="photo-grid" style="display:grid;grid-template-rows:1fr 1fr;gap:3px;">
       <div class="photo-item">
-        <img src="assets/her/install/her-09.jpg" alt="" />
+        <img id="img-her-3" src="assets/her/install/her-09.jpg" alt="" />
       </div>
       <div class="photo-item">
-        <img src="assets/her/install/her-07.jpg" alt="" />
+        <img id="img-her-4" src="assets/her/install/her-07.jpg" alt="" />
       </div>
     </div>
   </div>
@@ -265,34 +265,34 @@
   <!-- PHOTO BLOCK 3 — three views -->
   <div class="photo-grid photo-grid--3col" style="margin-top:3px">
     <div class="photo-item photo-item--square">
-      <img src="assets/her/install/her-01.jpg" alt="" />
+      <img id="img-her-5" src="assets/her/install/her-01.jpg" alt="" />
     </div>
     <div class="photo-item photo-item--square">
-      <img src="assets/her/install/her-08.jpg" alt="" />
+      <img id="img-her-6" src="assets/her/install/her-08.jpg" alt="" />
     </div>
     <div class="photo-item photo-item--square">
-      <img src="assets/her/install/her-02.jpg" alt="" />
+      <img id="img-her-7" src="assets/her/install/her-02.jpg" alt="" />
     </div>
   </div>
 
   <!-- INTERIOR REVEAL -->
   <div class="photo-full" style="margin-top:3px">
-    <img src="assets/her/install/her-12.jpg" alt="HER Console — interior" />
+    <img id="img-her-8" src="assets/her/install/her-12.jpg" alt="HER Console — interior" />
   </div>
 
   <!-- PHOTO BLOCK 4 — drawer details -->
   <div class="photo-grid photo-grid--2col" style="margin-top:3px">
     <div class="photo-item photo-item--wide">
-      <img src="assets/her/install/her-11.jpg" alt="" />
+      <img id="img-her-9" src="assets/her/install/her-11.jpg" alt="" />
     </div>
     <div class="photo-item photo-item--wide">
-      <img src="assets/her/install/her-13.jpg" alt="" />
+      <img id="img-her-10" src="assets/her/install/her-13.jpg" alt="" />
     </div>
   </div>
 
   <!-- FINAL FULL WIDTH -->
   <div class="photo-full" style="margin-top:3px">
-    <img src="assets/her/install/her-05.jpg" alt="HER Console — final" />
+    <img id="img-her-11" src="assets/her/install/her-05.jpg" alt="HER Console — final" />
   </div>
 
   <!-- CTA -->
@@ -314,6 +314,29 @@
       <span class="footer-copy">© 2026 Wewillbebirds Inc. Brooklyn, NY</span>
     </div>
   </footer>
+
+  <script>
+    fetch('/_content/her-console.json').then(function(r){return r.json();}).then(function(d){
+      var map = {
+        'img-her-hero': d.hero_image,
+        'img-her-1':    d.photo_1,
+        'img-her-2':    d.photo_2,
+        'img-her-3':    d.photo_3,
+        'img-her-4':    d.photo_4,
+        'img-her-5':    d.photo_5,
+        'img-her-6':    d.photo_6,
+        'img-her-7':    d.photo_7,
+        'img-her-8':    d.photo_8,
+        'img-her-9':    d.photo_9,
+        'img-her-10':   d.photo_10,
+        'img-her-11':   d.photo_11
+      };
+      Object.keys(map).forEach(function(id){
+        var el = document.getElementById(id);
+        if(el && map[id]) el.src = map[id];
+      });
+    }).catch(function(){});
+  </script>
 
 </body>
 </html>

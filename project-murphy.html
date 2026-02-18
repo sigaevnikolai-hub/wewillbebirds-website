@@ -182,7 +182,7 @@
 
   <!-- HERO -->
   <section class="project-hero">
-    <img src="assets/murphy-bed/Jenna-Hero2.jpg" alt="Murphy bed — Jenna & Bobby" class="project-hero-img" />
+    <img id="img-murphy-hero" src="assets/murphy-bed/Jenna-Hero2.jpg" alt="Murphy bed — Jenna & Bobby" class="project-hero-img" />
     <div class="project-hero-overlay"></div>
     <div class="project-hero-content">
       <p class="project-tag">Murphy Bed · Brooklyn</p>
@@ -207,14 +207,14 @@
   <!-- PHOTO BLOCK 1 -->
   <div class="photo-grid photo-grid--featured">
     <div class="photo-item photo-item--tall">
-      <img src="assets/murphy-bed/Jenna1.jpg" alt="" />
+      <img id="img-murphy-1" src="assets/murphy-bed/Jenna1.jpg" alt="" />
     </div>
     <div class="photo-grid" style="display:grid;grid-template-rows:1fr 1fr;gap:3px;">
       <div class="photo-item">
-        <img src="assets/murphy-bed/Jenna2.jpg" alt="" />
+        <img id="img-murphy-2" src="assets/murphy-bed/Jenna2.jpg" alt="" />
       </div>
       <div class="photo-item">
-        <img src="assets/murphy-bed/Jenna3.jpg" alt="" />
+        <img id="img-murphy-3" src="assets/murphy-bed/Jenna3.jpg" alt="" />
       </div>
     </div>
   </div>
@@ -246,22 +246,22 @@
   <!-- PHOTO BLOCK 2 -->
   <div class="photo-grid photo-grid--3col">
     <div class="photo-item photo-item--auto">
-      <img src="assets/murphy-bed/Jenna4.jpg" alt="" />
+      <img id="img-murphy-4" src="assets/murphy-bed/Jenna4.jpg" alt="" />
     </div>
     <div class="photo-item photo-item--auto">
-      <img src="assets/murphy-bed/Jenna5.jpg" alt="" />
+      <img id="img-murphy-5" src="assets/murphy-bed/Jenna5.jpg" alt="" />
     </div>
     <div class="photo-item photo-item--auto">
-      <img src="assets/murphy-bed/Jenna7.jpg" alt="" />
+      <img id="img-murphy-6" src="assets/murphy-bed/Jenna7.jpg" alt="" />
     </div>
   </div>
 
   <div class="photo-grid photo-grid--2col" style="margin-top:3px">
     <div class="photo-item photo-item--wide">
-      <img src="assets/murphy-bed/Jenna11.jpg" alt="" />
+      <img id="img-murphy-7" src="assets/murphy-bed/Jenna11.jpg" alt="" />
     </div>
     <div class="photo-item photo-item--wide">
-      <img src="assets/murphy-bed/Jenna-Hero2.jpg" alt="" />
+      <img id="img-murphy-8" src="assets/murphy-bed/Jenna-Hero2.jpg" alt="" />
     </div>
   </div>
 
@@ -284,6 +284,19 @@
       <span class="footer-copy">© 2026 Wewillbebirds Inc. Brooklyn, NY</span>
     </div>
   </footer>
+
+  <script>
+    fetch('/_content/projects/murphy-bed.json').then(function(r){return r.json();}).then(function(d){
+      var hero = d.hero_image || d.cover;
+      if(hero) document.getElementById('img-murphy-hero').src = hero;
+      var photos = d.photos || [];
+      var slots = ['img-murphy-1','img-murphy-2','img-murphy-3','img-murphy-4','img-murphy-5','img-murphy-6','img-murphy-7','img-murphy-8'];
+      slots.forEach(function(id, i){
+        var el = document.getElementById(id);
+        if(el && photos[i]) el.src = photos[i];
+      });
+    }).catch(function(){});
+  </script>
 
 </body>
 </html>

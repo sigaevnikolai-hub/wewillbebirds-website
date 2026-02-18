@@ -19,6 +19,14 @@ collections:
           - { label: "Hero Subline", name: "hero_subline", widget: "string" }
           - { label: "Statement Text", name: "statement", widget: "text" }
           - { label: "CTA Headline", name: "cta_headline", widget: "string" }
+          - { label: "Featured Image", name: "featured_image", widget: "image" }
+
+      - label: "Work Page"
+        name: "work_page"
+        file: "_content/work.json"
+        fields:
+          - { label: "HER Console Thumbnail", name: "her_console_image", widget: "image" }
+          - { label: "Murphy Bed Thumbnail", name: "murphy_bed_image", widget: "image" }
 
       - label: "About Page"
         name: "about"
@@ -40,6 +48,18 @@ collections:
             name: "story"
             widget: "list"
             field: { label: "Paragraph", name: "paragraph", widget: "text" }
+          - { label: "Hero Image", name: "hero_image", widget: "image" }
+          - { label: "Photo 1 (Full width — skyline)", name: "photo_1", widget: "image" }
+          - { label: "Photo 2 (Left panel — tall)", name: "photo_2", widget: "image" }
+          - { label: "Photo 3 (Right panel — top)", name: "photo_3", widget: "image" }
+          - { label: "Photo 4 (Right panel — bottom)", name: "photo_4", widget: "image" }
+          - { label: "Photo 5 (3-col grid — left)", name: "photo_5", widget: "image" }
+          - { label: "Photo 6 (3-col grid — center)", name: "photo_6", widget: "image" }
+          - { label: "Photo 7 (3-col grid — right)", name: "photo_7", widget: "image" }
+          - { label: "Photo 8 (Full width — interior reveal)", name: "photo_8", widget: "image" }
+          - { label: "Photo 9 (2-col grid — left)", name: "photo_9", widget: "image" }
+          - { label: "Photo 10 (2-col grid — right)", name: "photo_10", widget: "image" }
+          - { label: "Photo 11 (Final full width)", name: "photo_11", widget: "image" }
 
   - name: "work"
     label: "Work / Projects"
@@ -53,7 +73,8 @@ collections:
       - { label: "Category", name: "category", widget: "string" }
       - { label: "Location", name: "location", widget: "string" }
       - { label: "Description", name: "description", widget: "text" }
-      - { label: "Cover Image", name: "cover", widget: "image" }
+      - { label: "Hero Image", name: "hero_image", widget: "image" }
+      - { label: "Cover Image (Work grid thumbnail)", name: "cover", widget: "image" }
       - label: "Photos"
         name: "photos"
         widget: "list"

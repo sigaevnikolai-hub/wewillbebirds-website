@@ -44,7 +44,7 @@
     <div class="work-items">
 
       <a href="project-her.html" class="work-item work-item--tall" style="display:block">
-        <img src="assets/her/install/her-10.jpg" alt="HER Console" class="work-item-img" />
+        <img id="img-work-her" src="assets/her/install/her-10.jpg" alt="HER Console" class="work-item-img" />
         <div class="work-item-overlay">
           <div class="work-item-info">
             <h3>HER Console</h3>
@@ -54,7 +54,7 @@
       </a>
 
       <a href="project-murphy.html" class="work-item work-item--tall" style="display:block">
-        <img src="assets/murphy-bed/Jenna-Hero2.jpg" alt="Murphy Bed" class="work-item-img" />
+        <img id="img-work-murphy" src="assets/murphy-bed/Jenna-Hero2.jpg" alt="Murphy Bed" class="work-item-img" />
         <div class="work-item-overlay">
           <div class="work-item-info">
             <h3>Jenna & Bobby</h3>
@@ -126,5 +126,12 @@
       <span class="footer-copy">© 2026 Wewillbebirds Inc. Brooklyn, NY</span>
     </div>
   </footer>
+
+  <script>
+    fetch('/_content/work.json').then(function(r){return r.json();}).then(function(d){
+      if(d.her_console_image) document.getElementById('img-work-her').src = d.her_console_image;
+      if(d.murphy_bed_image) document.getElementById('img-work-murphy').src = d.murphy_bed_image;
+    }).catch(function(){});
+  </script>
 </body>
 </html>

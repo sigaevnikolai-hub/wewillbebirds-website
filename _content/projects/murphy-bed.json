@@ -3,6 +3,7 @@
   "category": "Murphy Bed",
   "location": "Brooklyn",
   "description": "A custom Murphy bed built for a Brooklyn apartment. Space-saving without compromise — clean lines, soft close, built to disappear into the room.",
+  "hero_image": "/assets/murphy-bed/Jenna-Hero2.jpg",
   "cover": "/assets/murphy-bed/Jenna-Hero2.jpg",
   "photos": [
     "/assets/murphy-bed/Jenna1.jpg",
@@ -11,6 +12,7 @@
     "/assets/murphy-bed/Jenna4.jpg",
     "/assets/murphy-bed/Jenna5.jpg",
     "/assets/murphy-bed/Jenna7.jpg",
-    "/assets/murphy-bed/Jenna11.jpg"
+    "/assets/murphy-bed/Jenna11.jpg",
+    "/assets/murphy-bed/Jenna-Hero2.jpg"
   ]
 }
