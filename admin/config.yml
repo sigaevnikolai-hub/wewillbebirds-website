@@ -8,6 +8,8 @@ public_folder: /assets/uploads
 collections:
   - name: "pages"
     label: "Pages"
+    extension: "json"
+    format: "json"
     files:
       - label: "Home Page"
         name: "home"
@@ -43,6 +45,8 @@ collections:
     label: "Work / Projects"
     folder: "_content/projects"
     create: true
+    extension: "json"
+    format: "json"
     slug: "{{slug}}"
     fields:
       - { label: "Title", name: "title", widget: "string" }
