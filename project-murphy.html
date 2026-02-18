@@ -185,20 +185,20 @@
     <img id="img-murphy-hero" src="assets/murphy-bed/Jenna-Hero2.jpg" alt="Murphy bed — Jenna & Bobby" class="project-hero-img" />
     <div class="project-hero-overlay"></div>
     <div class="project-hero-content">
-      <p class="project-tag">Murphy Bed · Brooklyn</p>
-      <h1 class="project-hero-title">Jenna & Bobby</h1>
+      <p class="project-tag" id="txt-murphy-tag">Murphy Bed · Brooklyn</p>
+      <h1 class="project-hero-title" id="txt-murphy-title">Jenna & Bobby</h1>
       <div class="project-meta">
         <div class="project-meta-item">
-          <span class="project-meta-label">Location</span>
-          <span class="project-meta-value">Brooklyn, New York</span>
+          <span class="project-meta-label" id="txt-murphy-meta-1-label">Location</span>
+          <span class="project-meta-value" id="txt-murphy-meta-1-value">Brooklyn, New York</span>
         </div>
         <div class="project-meta-item">
-          <span class="project-meta-label">Material</span>
-          <span class="project-meta-value">White oak</span>
+          <span class="project-meta-label" id="txt-murphy-meta-2-label">Material</span>
+          <span class="project-meta-value" id="txt-murphy-meta-2-value">White oak</span>
         </div>
         <div class="project-meta-item">
-          <span class="project-meta-label">Scope</span>
-          <span class="project-meta-value">Murphy bed + storage</span>
+          <span class="project-meta-label" id="txt-murphy-meta-3-label">Scope</span>
+          <span class="project-meta-value" id="txt-murphy-meta-3-value">Murphy bed + storage</span>
         </div>
       </div>
     </div>
@@ -222,8 +222,8 @@
   <!-- STORY -->
   <section class="story-section">
     <div class="story-inner">
-      <p class="story-label">The Story</p>
-      <div class="story-text">
+      <p class="story-label" id="txt-murphy-story-label">The Story</p>
+      <div class="story-text" id="txt-murphy-story-container">
         <p>I like good stories. This one starts with COVID.</p>
         <p>The moment New York went quiet in a way that felt impossible. The city didn't die, not even close, but it did something unfamiliar: it held its breath. People ran. Some fled to the suburbs, some disappeared to other states, some simply vanished into the idea that life could be easier somewhere else. For a while, it almost looked like the end of an era.</p>
         <p>And then there were the ones who did the opposite.</p>
@@ -287,6 +287,7 @@
 
   <script>
     fetch('/_content/projects/murphy-bed.json').then(function(r){return r.json();}).then(function(d){
+      // Images
       var hero = d.hero_image || d.cover;
       if(hero) document.getElementById('img-murphy-hero').src = hero;
       var photos = d.photos || [];
@@ -295,6 +296,26 @@
         var el = document.getElementById(id);
         if(el && photos[i]) el.src = photos[i];
       });
+      // Text
+      if(d.tag) document.getElementById('txt-murphy-tag').textContent = d.tag;
+      if(d.title) document.getElementById('txt-murphy-title').textContent = d.title;
+      if(d.meta_1_label) document.getElementById('txt-murphy-meta-1-label').textContent = d.meta_1_label;
+      if(d.meta_1_value) document.getElementById('txt-murphy-meta-1-value').textContent = d.meta_1_value;
+      if(d.meta_2_label) document.getElementById('txt-murphy-meta-2-label').textContent = d.meta_2_label;
+      if(d.meta_2_value) document.getElementById('txt-murphy-meta-2-value').textContent = d.meta_2_value;
+      if(d.meta_3_label) document.getElementById('txt-murphy-meta-3-label').textContent = d.meta_3_label;
+      if(d.meta_3_value) document.getElementById('txt-murphy-meta-3-value').textContent = d.meta_3_value;
+      if(d.story_label) document.getElementById('txt-murphy-story-label').textContent = d.story_label;
+      // Story paragraphs — rebuild from array if present
+      if(d.story && Array.isArray(d.story) && d.story.length) {
+        var container = document.getElementById('txt-murphy-story-container');
+        container.innerHTML = '';
+        d.story.forEach(function(para){
+          var p = document.createElement('p');
+          p.textContent = para;
+          container.appendChild(p);
+        });
+      }
     }).catch(function(){});
   </script>
 

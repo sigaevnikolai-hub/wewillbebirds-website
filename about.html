@@ -38,25 +38,25 @@
   <div class="about-wrap">
     <div class="about-grid">
       <div class="about-left">
-        <p class="about-label">The Studio</p>
-        <h1 class="about-title">Built for clients<br />who want a<br /><em>vision.</em></h1>
+        <p class="about-label" id="txt-about-label">The Studio</p>
+        <h1 class="about-title"><span id="txt-about-headline">Built for clients who want a</span><br /><em id="txt-about-headline-em">vision.</em></h1>
         <div class="about-body">
-          <p>
+          <p id="txt-about-bio-1">
             Wewillbebirds is a custom millwork studio based in Brooklyn, New York. 
             We work with homeowners, architects, and designers on residential and 
             commercial projects across the city.
           </p>
-          <p>
+          <p id="txt-about-bio-2">
             Every piece is built to spec, in-house, with the hardware and finishes 
             we believe in. We use Blum hardware because it performs. 
             We finish with Rubio Monocoat and oil-based polyurethane because 
             anything less isn't something we're willing to deliver.
           </p>
-          <p>
+          <p id="txt-about-bio-3">
             We don't compete on price. We compete on the quality of the result — 
             and the confidence that the design is right.
           </p>
-          <p>
+          <p id="txt-about-bio-4">
             If you know what you want and you want it done properly, 
             this is where you should be.
           </p>
@@ -68,23 +68,23 @@
         <div class="about-details">
           <div class="about-detail">
             <span class="about-detail-label">Location</span>
-            <span class="about-detail-value">Brooklyn, New York</span>
+            <span class="about-detail-value" id="txt-about-location">Brooklyn, New York</span>
           </div>
           <div class="about-detail">
             <span class="about-detail-label">Founded</span>
-            <span class="about-detail-value">Brooklyn, 2020</span>
+            <span class="about-detail-value" id="txt-about-founded">Brooklyn, 2020</span>
           </div>
           <div class="about-detail">
             <span class="about-detail-label">Specialties</span>
-            <span class="about-detail-value">Custom millwork, cabinetry,<br />architectural interiors</span>
+            <span class="about-detail-value" id="txt-about-specialties">Custom millwork, cabinetry,<br />architectural interiors</span>
           </div>
           <div class="about-detail">
             <span class="about-detail-label">Minimum Project</span>
-            <span class="about-detail-value">$8,000</span>
+            <span class="about-detail-value" id="txt-about-minimum">$8,000</span>
           </div>
           <div class="about-detail">
             <span class="about-detail-label">Service Area</span>
-            <span class="about-detail-value">New York City</span>
+            <span class="about-detail-value" id="txt-about-service-area">New York City</span>
           </div>
         </div>
       </div>
@@ -101,5 +101,22 @@
       <span class="footer-copy">© 2026 Wewillbebirds Inc. Brooklyn, NY</span>
     </div>
   </footer>
+
+  <script>
+    fetch('/_content/about.json').then(function(r){return r.json();}).then(function(d){
+      if(d.label) document.getElementById('txt-about-label').textContent = d.label;
+      if(d.headline) document.getElementById('txt-about-headline').textContent = d.headline;
+      if(d.headline_em) document.getElementById('txt-about-headline-em').textContent = d.headline_em;
+      if(d.bio_1) document.getElementById('txt-about-bio-1').textContent = d.bio_1;
+      if(d.bio_2) document.getElementById('txt-about-bio-2').textContent = d.bio_2;
+      if(d.bio_3) document.getElementById('txt-about-bio-3').textContent = d.bio_3;
+      if(d.bio_4) document.getElementById('txt-about-bio-4').textContent = d.bio_4;
+      if(d.detail_location) document.getElementById('txt-about-location').textContent = d.detail_location;
+      if(d.detail_founded) document.getElementById('txt-about-founded').textContent = d.detail_founded;
+      if(d.detail_specialties) document.getElementById('txt-about-specialties').textContent = d.detail_specialties;
+      if(d.detail_minimum) document.getElementById('txt-about-minimum').textContent = d.detail_minimum;
+      if(d.detail_service_area) document.getElementById('txt-about-service-area').textContent = d.detail_service_area;
+    }).catch(function(){});
+  </script>
 </body>
 </html>

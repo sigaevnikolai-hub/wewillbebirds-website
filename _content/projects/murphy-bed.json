@@ -1,15 +1,15 @@
 {
-  "tag": "Murphy Bed · Brooklyn",
   "title": "Jenna & Bobby",
+  "project_tag": "Murphy Bed · Brooklyn",
   "category": "Murphy Bed",
   "location": "Brooklyn",
   "description": "A custom Murphy bed built for a Brooklyn apartment. Space-saving without compromise — clean lines, soft close, built to disappear into the room.",
-  "meta_1_label": "Location",
-  "meta_1_value": "Brooklyn, New York",
-  "meta_2_label": "Material",
-  "meta_2_value": "White oak",
-  "meta_3_label": "Scope",
-  "meta_3_value": "Murphy bed + storage",
+  "meta_location_label": "Location",
+  "meta_location_value": "Brooklyn, New York",
+  "meta_material_label": "Material",
+  "meta_material_value": "White oak",
+  "meta_scope_label": "Scope",
+  "meta_scope_value": "Murphy bed + storage",
   "story_label": "The Story",
   "story": [
     "I like good stories. This one starts with COVID.",
@@ -28,6 +28,9 @@
     "And maybe purpose isn't some grand revelation. Maybe it isn't a single sentence you find and then your life makes sense forever. Maybe purpose is smaller than that. Maybe it's leaving a mark you didn't have to leave, and leaving it well. Maybe it's becoming part of the city's nervous system, quietly, honestly, through work that lasts longer than your mood.",
     "Maybe purpose is walking down a street and knowing the city remembers you, even if it doesn't know your name. Because somewhere behind a window, in a home full of ordinary life, there's a piece of you doing its job."
   ],
+  "cta_headline": "Have a project",
+  "cta_headline_em": "in mind?",
+  "cta_sub": "We work with a limited number of clients at a time.",
   "hero_image": "/assets/murphy-bed/Jenna-Hero2.jpg",
   "cover": "/assets/murphy-bed/Jenna-Hero2.jpg",
   "photos": [
