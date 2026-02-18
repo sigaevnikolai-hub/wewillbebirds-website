@@ -1,9 +1,11 @@
 {
+  "tag": "Console · Manhattan",
   "title": "HER Console",
   "description": "Smooth and sleek on the outside. Fun and rich on the inside — like a well-tailored Paul Smith suit.",
   "material": "Lacquered MDF",
   "finish": "Glass top",
   "feature": "Painted interiors, brass trim, fluted fronts",
+  "story_label": "The Story",
   "story": [
     "I don't really have project favorites. But some leave a dent in my heart. This one is that.",
     "From the first drawing to the final install, I was excited to make it real. I believe results like this only happen when client and builder truly understand each other — when there's trust, freedom, and real communication on both sides.",
@@ -11,6 +13,12 @@
     "And a huge mirror with a precise cutout to fit the console. No buttons. Light appears with a glide of your hand along the curve. All sensors hidden, tracking motion in silence.",
     "Really proud of this one. Will miss her."
   ],
+  "detail_1_label": "The exterior",
+  "detail_1_value": "Fluted lacquered fronts. Glass top. Every surface flush — nothing interrupts the line.",
+  "detail_2_label": "The mirror",
+  "detail_2_value": "Custom cutout to the millimeter. The console and mirror read as one object.",
+  "detail_3_label": "The interior",
+  "detail_3_value": "Hand-painted drawer boxes. Brass inlay trim. A private world inside a composed exterior.",
   "hero_image": "/assets/her/install/her-10.jpg",
   "photo_1": "/assets/her/install/her-03.jpg",
   "photo_2": "/assets/her/install/her-06.jpg",

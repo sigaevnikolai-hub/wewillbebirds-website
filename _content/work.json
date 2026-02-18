@@ -1,4 +1,20 @@
 {
+  "page_headline": "Selected",
+  "page_headline_em": "projects.",
+  "her_project_name": "HER Console",
+  "her_project_label": "Bespoke console · Manhattan",
+  "murphy_project_name": "Jenna & Bobby",
+  "murphy_project_label": "Murphy bed · Brooklyn",
+  "card_3_name": "Tribeca Credenza",
+  "card_3_label": "Walnut · Manhattan",
+  "card_4_name": "Chelsea Shelves",
+  "card_4_label": "White oak · Manhattan",
+  "card_5_name": "Custom Bar",
+  "card_5_label": "White oak + brass · Brooklyn",
+  "card_6_name": "56 Leonard — Kitchen",
+  "card_6_label": "Custom cabinetry · Tribeca",
+  "card_7_name": "Custom Wardrobe",
+  "card_7_label": "White oak · Manhattan",
   "her_console_image": "/assets/her/install/her-10.jpg",
   "murphy_bed_image": "/assets/murphy-bed/Jenna-Hero2.jpg"
 }

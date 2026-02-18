@@ -35,7 +35,12 @@ collections:
           - { label: "Headline", name: "headline", widget: "string" }
           - { label: "Bio Text", name: "bio", widget: "text" }
 
-      - label: "HER Console Project"
+  - name: "work"
+    label: "Work / Projects"
+    extension: "json"
+    format: "json"
+    files:
+      - label: "HER Console"
         name: "her_console"
         file: "_content/her-console.json"
         fields:
@@ -61,21 +66,17 @@ collections:
           - { label: "Photo 10 (2-col grid — right)", name: "photo_10", widget: "image" }
           - { label: "Photo 11 (Final full width)", name: "photo_11", widget: "image" }
 
-  - name: "work"
-    label: "Work / Projects"
-    folder: "_content/projects"
-    create: true
-    extension: "json"
-    format: "json"
-    slug: "{{slug}}"
-    fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Category", name: "category", widget: "string" }
-      - { label: "Location", name: "location", widget: "string" }
-      - { label: "Description", name: "description", widget: "text" }
-      - { label: "Hero Image", name: "hero_image", widget: "image" }
-      - { label: "Cover Image (Work grid thumbnail)", name: "cover", widget: "image" }
-      - label: "Photos"
-        name: "photos"
-        widget: "list"
-        field: { label: "Photo", name: "photo", widget: "image" }
+      - label: "Murphy Bed — Jenna & Bobby"
+        name: "murphy_bed"
+        file: "_content/projects/murphy-bed.json"
+        fields:
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Category", name: "category", widget: "string" }
+          - { label: "Location", name: "location", widget: "string" }
+          - { label: "Description", name: "description", widget: "text" }
+          - { label: "Hero Image", name: "hero_image", widget: "image" }
+          - { label: "Cover Image (Work grid thumbnail)", name: "cover", widget: "image" }
+          - label: "Photos"
+            name: "photos"
+            widget: "list"
+            field: { label: "Photo", name: "photo", widget: "image" }

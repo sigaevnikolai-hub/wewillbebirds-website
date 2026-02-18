@@ -32,7 +32,7 @@
     </div>
     <div class="hero-content">
       <p class="hero-label">New York City</p>
-      <h1 class="hero-headline">Wewillbebirds.<br /><em>Theatrical millwork.</em></h1>
+      <h1 class="hero-headline"><span id="txt-hero-headline">Wewillbebirds.</span><br /><em id="txt-hero-subline">Theatrical millwork.</em></h1>
       <a href="contact.html" class="btn-primary">Start a project</a>
     </div>
     <div class="hero-scroll">
@@ -44,7 +44,7 @@
   <!-- STATEMENT -->
   <section class="statement">
     <div class="container">
-      <p class="statement-text">
+      <p class="statement-text" id="txt-statement">
         Wewillbebirds makes bespoke millwork for clients who want more than execution — 
         they want something that couldn't have come from anyone else.
       </p>
@@ -60,9 +60,9 @@
         </a>
       </div>
       <div class="featured-info">
-        <p class="featured-label">Featured Work</p>
-        <h2 class="featured-title">HER Console</h2>
-        <p class="featured-desc">
+        <p class="featured-label" id="txt-featured-label">Featured Work</p>
+        <h2 class="featured-title" id="txt-featured-title">HER Console</h2>
+        <p class="featured-desc" id="txt-featured-desc">
           Solid white oak. Fluted front. Designed to occupy space the way a sculpture does — 
           with intention and weight.
         </p>
@@ -76,20 +76,20 @@
     <div class="container">
       <div class="services-grid">
         <div class="service-item">
-          <h3>Custom Cabinetry</h3>
-          <p>Built-ins, wardrobes, kitchens. Made to the millimeter.</p>
+          <h3 id="txt-service-1-name">Custom Cabinetry</h3>
+          <p id="txt-service-1-desc">Built-ins, wardrobes, kitchens. Made to the millimeter.</p>
         </div>
         <div class="service-item">
-          <h3>Furniture</h3>
-          <p>Consoles, credenzas, bar cabinets. One of a kind.</p>
+          <h3 id="txt-service-2-name">Furniture</h3>
+          <p id="txt-service-2-desc">Consoles, credenzas, bar cabinets. One of a kind.</p>
         </div>
         <div class="service-item">
-          <h3>Architectural Millwork</h3>
-          <p>Paneling, wall treatments, integrated storage. The full room.</p>
+          <h3 id="txt-service-3-name">Architectural Millwork</h3>
+          <p id="txt-service-3-desc">Paneling, wall treatments, integrated storage. The full room.</p>
         </div>
         <div class="service-item">
-          <h3>Installation</h3>
-          <p>New York City and surrounding area. White-glove.</p>
+          <h3 id="txt-service-4-name">Installation</h3>
+          <p id="txt-service-4-desc">New York City and surrounding area. White-glove.</p>
         </div>
       </div>
     </div>
@@ -98,8 +98,8 @@
   <!-- CTA -->
   <section class="cta">
     <div class="container">
-      <h2 class="cta-headline">Have a project in mind?</h2>
-      <p class="cta-sub">We work with a limited number of clients at a time. Tell us about your space.</p>
+      <h2 class="cta-headline" id="txt-cta-headline">Have a project in mind?</h2>
+      <p class="cta-sub" id="txt-cta-sub">We work with a limited number of clients at a time. Tell us about your space.</p>
       <a href="contact.html" class="btn-primary">Get in touch</a>
     </div>
   </section>
@@ -119,6 +119,22 @@
   <script>
     fetch('/_content/home.json').then(function(r){return r.json();}).then(function(d){
       if(d.featured_image) document.getElementById('img-featured').src = d.featured_image;
+      if(d.hero_headline) document.getElementById('txt-hero-headline').textContent = d.hero_headline;
+      if(d.hero_subline) document.getElementById('txt-hero-subline').textContent = d.hero_subline;
+      if(d.statement) document.getElementById('txt-statement').textContent = d.statement;
+      if(d.featured_label) document.getElementById('txt-featured-label').textContent = d.featured_label;
+      if(d.featured_title) document.getElementById('txt-featured-title').textContent = d.featured_title;
+      if(d.featured_desc) document.getElementById('txt-featured-desc').textContent = d.featured_desc;
+      if(d.cta_headline) document.getElementById('txt-cta-headline').textContent = d.cta_headline;
+      if(d.cta_subtext) document.getElementById('txt-cta-sub').textContent = d.cta_subtext;
+      if(d.service_1_name) document.getElementById('txt-service-1-name').textContent = d.service_1_name;
+      if(d.service_1_desc) document.getElementById('txt-service-1-desc').textContent = d.service_1_desc;
+      if(d.service_2_name) document.getElementById('txt-service-2-name').textContent = d.service_2_name;
+      if(d.service_2_desc) document.getElementById('txt-service-2-desc').textContent = d.service_2_desc;
+      if(d.service_3_name) document.getElementById('txt-service-3-name').textContent = d.service_3_name;
+      if(d.service_3_desc) document.getElementById('txt-service-3-desc').textContent = d.service_3_desc;
+      if(d.service_4_name) document.getElementById('txt-service-4-name').textContent = d.service_4_name;
+      if(d.service_4_desc) document.getElementById('txt-service-4-desc').textContent = d.service_4_desc;
     }).catch(function(){});
   </script>
 
