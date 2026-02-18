@@ -268,8 +268,8 @@
   <!-- NEXT PROJECT / CTA -->
   <section class="cta">
     <div class="container">
-      <h2 class="cta-headline">Have a project<br /><em>in mind?</em></h2>
-      <p class="cta-sub">We work with a limited number of clients at a time.</p>
+      <h2 class="cta-headline"><span id="txt-murphy-cta-headline">Have a project</span><br /><em id="txt-murphy-cta-em">in mind?</em></h2>
+      <p class="cta-sub" id="txt-murphy-cta-sub">We work with a limited number of clients at a time.</p>
       <a href="contact.html" class="btn-primary">Get in touch</a>
     </div>
   </section>
@@ -281,12 +281,16 @@
         <a href="https://instagram.com/wewillbebirds" target="_blank">Instagram</a>
         <a href="mailto:nikolay@wewillbebirds.com">Email</a>
       </div>
-      <span class="footer-copy">© 2026 Wewillbebirds Inc. Brooklyn, NY</span>
+      <span class="footer-copy" id="txt-footer-copy">© 2026 Wewillbebirds Inc. Brooklyn, NY</span>
     </div>
   </footer>
 
   <script>
-    fetch('/_content/projects/murphy-bed.json').then(function(r){return r.json();}).then(function(d){
+    Promise.all([
+      fetch('/_content/projects/murphy-bed.json').then(function(r){return r.json();}),
+      fetch('/_content/global.json').then(function(r){return r.json();})
+    ]).then(function(res){
+      var d = res[0], g = res[1];
       // Images
       var hero = d.hero_image || d.cover;
       if(hero) document.getElementById('img-murphy-hero').src = hero;
@@ -296,17 +300,19 @@
         var el = document.getElementById(id);
         if(el && photos[i]) el.src = photos[i];
       });
-      // Text
-      if(d.tag) document.getElementById('txt-murphy-tag').textContent = d.tag;
-      if(d.title) document.getElementById('txt-murphy-title').textContent = d.title;
-      if(d.meta_1_label) document.getElementById('txt-murphy-meta-1-label').textContent = d.meta_1_label;
-      if(d.meta_1_value) document.getElementById('txt-murphy-meta-1-value').textContent = d.meta_1_value;
-      if(d.meta_2_label) document.getElementById('txt-murphy-meta-2-label').textContent = d.meta_2_label;
-      if(d.meta_2_value) document.getElementById('txt-murphy-meta-2-value').textContent = d.meta_2_value;
-      if(d.meta_3_label) document.getElementById('txt-murphy-meta-3-label').textContent = d.meta_3_label;
-      if(d.meta_3_value) document.getElementById('txt-murphy-meta-3-value').textContent = d.meta_3_value;
+      // Hero text
+      if(d.project_tag) document.getElementById('txt-murphy-tag').textContent   = d.project_tag;
+      if(d.title)       document.getElementById('txt-murphy-title').textContent  = d.title;
+      // Meta labels + values
+      if(d.meta_location_label) document.getElementById('txt-murphy-meta-1-label').textContent = d.meta_location_label;
+      if(d.meta_location_value) document.getElementById('txt-murphy-meta-1-value').textContent = d.meta_location_value;
+      if(d.meta_material_label) document.getElementById('txt-murphy-meta-2-label').textContent = d.meta_material_label;
+      if(d.meta_material_value) document.getElementById('txt-murphy-meta-2-value').textContent = d.meta_material_value;
+      if(d.meta_scope_label)    document.getElementById('txt-murphy-meta-3-label').textContent = d.meta_scope_label;
+      if(d.meta_scope_value)    document.getElementById('txt-murphy-meta-3-value').textContent = d.meta_scope_value;
+      // Story label
       if(d.story_label) document.getElementById('txt-murphy-story-label').textContent = d.story_label;
-      // Story paragraphs — rebuild from array if present
+      // Story paragraphs — rebuild from array
       if(d.story && Array.isArray(d.story) && d.story.length) {
         var container = document.getElementById('txt-murphy-story-container');
         container.innerHTML = '';
@@ -316,6 +322,12 @@
           container.appendChild(p);
         });
       }
+      // CTA
+      if(d.cta_headline)    document.getElementById('txt-murphy-cta-headline').textContent = d.cta_headline;
+      if(d.cta_headline_em) document.getElementById('txt-murphy-cta-em').textContent       = d.cta_headline_em;
+      if(d.cta_sub)         document.getElementById('txt-murphy-cta-sub').textContent      = d.cta_sub;
+      // Footer (global)
+      if(g.footer_copy) document.getElementById('txt-footer-copy').textContent = g.footer_copy;
     }).catch(function(){});
   </script>
 

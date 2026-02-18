@@ -6,148 +6,219 @@ media_folder: assets/uploads
 public_folder: /assets/uploads
 
 collections:
+
+  # ─────────────────────────────────────────────
+  # GLOBAL SETTINGS
+  # ─────────────────────────────────────────────
+  - name: "global"
+    label: "⚙ Global Settings"
+    extension: "json"
+    format: "json"
+    files:
+      - label: "Global Settings"
+        name: "global"
+        file: "_content/global.json"
+        fields:
+          - { label: "Footer Copyright Text", name: "footer_copy", widget: "string" }
+
+  # ─────────────────────────────────────────────
+  # PAGES
+  # ─────────────────────────────────────────────
   - name: "pages"
     label: "Pages"
     extension: "json"
     format: "json"
     files:
-      - label: "Home Page"
+
+      # ── HOME ──────────────────────────────────
+      - label: "🏠 Home"
         name: "home"
         file: "_content/home.json"
         fields:
-          - { label: "Hero Headline", name: "hero_headline", widget: "string" }
-          - { label: "Hero Subline", name: "hero_subline", widget: "string" }
-          - { label: "Statement Text", name: "statement", widget: "text" }
-          - { label: "Featured Label", name: "featured_label", widget: "string" }
-          - { label: "Featured Project Title", name: "featured_title", widget: "string" }
-          - { label: "Featured Project Description", name: "featured_desc", widget: "text" }
-          - { label: "Featured Image", name: "featured_image", widget: "image" }
-          - { label: "CTA Headline", name: "cta_headline", widget: "string" }
-          - { label: "CTA Subtext", name: "cta_subtext", widget: "text" }
-          - { label: "Service 1 Name", name: "service_1_name", widget: "string" }
-          - { label: "Service 1 Description", name: "service_1_desc", widget: "text" }
-          - { label: "Service 2 Name", name: "service_2_name", widget: "string" }
-          - { label: "Service 2 Description", name: "service_2_desc", widget: "text" }
-          - { label: "Service 3 Name", name: "service_3_name", widget: "string" }
-          - { label: "Service 3 Description", name: "service_3_desc", widget: "text" }
-          - { label: "Service 4 Name", name: "service_4_name", widget: "string" }
-          - { label: "Service 4 Description", name: "service_4_desc", widget: "text" }
+          - { label: "Hero — Headline",             name: "hero_headline",         widget: "string" }
+          - { label: "Hero — Subline (italic)",      name: "hero_subline",          widget: "string" }
+          - { label: "Statement Paragraph",          name: "statement",             widget: "text" }
+          - { label: "Featured — Label",             name: "featured_label",        widget: "string" }
+          - { label: "Featured — Image",             name: "featured_image",        widget: "image" }
+          - { label: "Featured — Project Title",     name: "featured_project_title", widget: "string" }
+          - { label: "Featured — Description",       name: "featured_project_desc",  widget: "text" }
+          - { label: "Featured — CTA Button Text",   name: "featured_project_cta",   widget: "string" }
+          - { label: "Service 1 — Title",            name: "service_1_title",       widget: "string" }
+          - { label: "Service 1 — Description",      name: "service_1_desc",        widget: "string" }
+          - { label: "Service 2 — Title",            name: "service_2_title",       widget: "string" }
+          - { label: "Service 2 — Description",      name: "service_2_desc",        widget: "string" }
+          - { label: "Service 3 — Title",            name: "service_3_title",       widget: "string" }
+          - { label: "Service 3 — Description",      name: "service_3_desc",        widget: "string" }
+          - { label: "Service 4 — Title",            name: "service_4_title",       widget: "string" }
+          - { label: "Service 4 — Description",      name: "service_4_desc",        widget: "string" }
+          - { label: "CTA — Headline",               name: "cta_headline",          widget: "string" }
+          - { label: "CTA — Subtext",                name: "cta_sub",               widget: "string" }
 
-      - label: "Work Page"
+      # ── WORK ──────────────────────────────────
+      - label: "🗂 Work"
         name: "work_page"
         file: "_content/work.json"
         fields:
-          - { label: "Page Headline", name: "page_headline", widget: "string" }
-          - { label: "Page Headline (italic part)", name: "page_headline_em", widget: "string" }
-          - { label: "HER Console - Project Name", name: "her_project_name", widget: "string" }
-          - { label: "HER Console - Label", name: "her_project_label", widget: "string" }
-          - { label: "HER Console Thumbnail", name: "her_console_image", widget: "image" }
-          - { label: "Murphy Bed - Project Name", name: "murphy_project_name", widget: "string" }
-          - { label: "Murphy Bed - Label", name: "murphy_project_label", widget: "string" }
-          - { label: "Murphy Bed Thumbnail", name: "murphy_bed_image", widget: "image" }
-          - { label: "Card 3 - Name", name: "card_3_name", widget: "string" }
-          - { label: "Card 3 - Label", name: "card_3_label", widget: "string" }
-          - { label: "Card 4 - Name", name: "card_4_name", widget: "string" }
-          - { label: "Card 4 - Label", name: "card_4_label", widget: "string" }
-          - { label: "Card 5 - Name", name: "card_5_name", widget: "string" }
-          - { label: "Card 5 - Label", name: "card_5_label", widget: "string" }
-          - { label: "Card 6 - Name", name: "card_6_name", widget: "string" }
-          - { label: "Card 6 - Label", name: "card_6_label", widget: "string" }
-          - { label: "Card 7 - Name", name: "card_7_name", widget: "string" }
-          - { label: "Card 7 - Label", name: "card_7_label", widget: "string" }
+          - { label: "Page Headline",                name: "page_headline",         widget: "string" }
+          - { label: "Page Headline — Italic Part",  name: "page_headline_em",      widget: "string" }
+          - { label: "HER Console — Thumbnail Image",  name: "her_console_image",    widget: "image" }
+          - { label: "HER Console — Title",            name: "her_console_title",    widget: "string" }
+          - { label: "HER Console — Category",         name: "her_console_category", widget: "string" }
+          - { label: "Murphy Bed — Thumbnail Image",   name: "murphy_bed_image",     widget: "image" }
+          - { label: "Murphy Bed — Title",             name: "murphy_bed_title",     widget: "string" }
+          - { label: "Murphy Bed — Category",          name: "murphy_bed_category",  widget: "string" }
+          - { label: "Card 3 — Placeholder Text",      name: "placeholder_tribeca",  widget: "string" }
+          - { label: "Card 3 — Title",                 name: "tribeca_title",        widget: "string" }
+          - { label: "Card 3 — Category",              name: "tribeca_category",     widget: "string" }
+          - { label: "Card 4 — Placeholder Text",      name: "placeholder_chelsea",  widget: "string" }
+          - { label: "Card 4 — Title",                 name: "chelsea_title",        widget: "string" }
+          - { label: "Card 4 — Category",              name: "chelsea_category",     widget: "string" }
+          - { label: "Card 5 — Placeholder Text",      name: "placeholder_bar",      widget: "string" }
+          - { label: "Card 5 — Title",                 name: "bar_title",            widget: "string" }
+          - { label: "Card 5 — Category",              name: "bar_category",         widget: "string" }
+          - { label: "Card 6 — Placeholder Text",      name: "placeholder_leonard",  widget: "string" }
+          - { label: "Card 6 — Title",                 name: "leonard_title",        widget: "string" }
+          - { label: "Card 6 — Category",              name: "leonard_category",     widget: "string" }
+          - { label: "Card 7 — Placeholder Text",      name: "placeholder_wardrobe", widget: "string" }
+          - { label: "Card 7 — Title",                 name: "wardrobe_title",       widget: "string" }
+          - { label: "Card 7 — Category",              name: "wardrobe_category",    widget: "string" }
 
-      - label: "About Page"
+      # ── ABOUT ─────────────────────────────────
+      - label: "👤 About"
         name: "about"
         file: "_content/about.json"
         fields:
-          - { label: "Section Label", name: "label", widget: "string" }
-          - { label: "Headline (main line)", name: "headline", widget: "string" }
-          - { label: "Headline (italic/emphasis)", name: "headline_em", widget: "string" }
-          - { label: "Bio Paragraph 1", name: "bio_1", widget: "text" }
-          - { label: "Bio Paragraph 2", name: "bio_2", widget: "text" }
-          - { label: "Bio Paragraph 3", name: "bio_3", widget: "text" }
-          - { label: "Bio Paragraph 4", name: "bio_4", widget: "text" }
-          - { label: "Detail - Location", name: "detail_location", widget: "string" }
-          - { label: "Detail - Founded", name: "detail_founded", widget: "string" }
-          - { label: "Detail - Specialties", name: "detail_specialties", widget: "string" }
-          - { label: "Detail - Minimum Project", name: "detail_minimum", widget: "string" }
-          - { label: "Detail - Service Area", name: "detail_service_area", widget: "string" }
+          - { label: "Section Label",              name: "label",       widget: "string" }
+          - { label: "Title — Line 1",             name: "title_line1", widget: "string" }
+          - { label: "Title — Line 2",             name: "title_line2", widget: "string" }
+          - { label: "Title — Italic Word",        name: "title_em",    widget: "string" }
+          - { label: "Body — Paragraph 1",         name: "body_1",      widget: "text" }
+          - { label: "Body — Paragraph 2",         name: "body_2",      widget: "text" }
+          - { label: "Body — Paragraph 3",         name: "body_3",      widget: "text" }
+          - { label: "Body — Paragraph 4",         name: "body_4",      widget: "text" }
+          - { label: "Portrait Photo",             name: "portrait_image",       widget: "image", required: false }
+          - { label: "Portrait Placeholder Text",  name: "portrait_placeholder", widget: "string" }
+          - { label: "Detail — Location Label",    name: "detail_location_label",    widget: "string" }
+          - { label: "Detail — Location Value",    name: "detail_location_value",    widget: "string" }
+          - { label: "Detail — Founded Label",     name: "detail_founded_label",     widget: "string" }
+          - { label: "Detail — Founded Value",     name: "detail_founded_value",     widget: "string" }
+          - { label: "Detail — Specialties Label", name: "detail_specialties_label", widget: "string" }
+          - { label: "Detail — Specialties Value", name: "detail_specialties_value", widget: "string" }
+          - { label: "Detail — Minimum Label",     name: "detail_minimum_label",     widget: "string" }
+          - { label: "Detail — Minimum Value",     name: "detail_minimum_value",     widget: "string" }
+          - { label: "Detail — Service Area Label", name: "detail_service_label",    widget: "string" }
+          - { label: "Detail — Service Area Value", name: "detail_service_value",    widget: "string" }
+          - { label: "Headline (legacy)",          name: "headline", widget: "string", required: false }
+          - { label: "Bio (legacy)",               name: "bio",      widget: "text",   required: false }
 
-      - label: "Contact Page"
+      # ── CONTACT ───────────────────────────────
+      - label: "✉ Contact"
         name: "contact"
         file: "_content/contact.json"
         fields:
-          - { label: "Section Label", name: "label", widget: "string" }
-          - { label: "Title Line 1", name: "title_line1", widget: "string" }
-          - { label: "Title Line 2 (with italic)", name: "title_line2", widget: "string" }
-          - { label: "Introductory Note", name: "note", widget: "text" }
-          - { label: "Phone Number", name: "phone", widget: "string" }
-          - { label: "Email Address", name: "email", widget: "string" }
-          - { label: "Instagram Handle", name: "instagram", widget: "string" }
-          - { label: "Studio Address", name: "studio", widget: "string" }
+          - { label: "Section Label",             name: "label",       widget: "string" }
+          - { label: "Title — Line 1",            name: "title_line1", widget: "string" }
+          - { label: "Title — Line 2",            name: "title_line2", widget: "string" }
+          - { label: "Title — Italic Word",       name: "title_em",    widget: "string" }
+          - { label: "Intro Note",                name: "note",        widget: "text" }
+          - { label: "Phone — Label",             name: "phone_label", widget: "string" }
+          - { label: "Phone — Display Number",    name: "phone_value", widget: "string" }
+          - { label: "Phone — href (e.g. tel:+1...)", name: "phone_href", widget: "string" }
+          - { label: "Email — Label",             name: "email_label", widget: "string" }
+          - { label: "Email — Display Address",   name: "email_value", widget: "string" }
+          - { label: "Email — href (e.g. mailto:...)", name: "email_href", widget: "string" }
+          - { label: "Instagram — Label",         name: "instagram_label", widget: "string" }
+          - { label: "Instagram — Handle",        name: "instagram_value", widget: "string" }
+          - { label: "Instagram — URL",           name: "instagram_href",  widget: "string" }
+          - { label: "Studio — Label",            name: "studio_label",    widget: "string" }
+          - { label: "Studio — Address",          name: "studio_value",    widget: "string" }
+          - { label: "Form — Name Field Label",       name: "form_name_label",        widget: "string" }
+          - { label: "Form — Name Placeholder",       name: "form_name_placeholder",  widget: "string" }
+          - { label: "Form — Email Field Label",      name: "form_email_label",       widget: "string" }
+          - { label: "Form — Email Placeholder",      name: "form_email_placeholder", widget: "string" }
+          - { label: "Form — Phone Field Label",      name: "form_phone_label",       widget: "string" }
+          - { label: "Form — Phone Placeholder",      name: "form_phone_placeholder", widget: "string" }
+          - { label: "Form — Project Field Label",    name: "form_project_label",       widget: "string" }
+          - { label: "Form — Project Placeholder",    name: "form_project_placeholder", widget: "text" }
+          - { label: "Form — Submit Button Text",     name: "form_submit_text",         widget: "string" }
 
-  - name: "work"
-    label: "Work / Projects"
-    extension: "json"
-    format: "json"
-    files:
-      - label: "HER Console"
+      # ── HER CONSOLE ───────────────────────────
+      - label: "📸 HER Console Project"
         name: "her_console"
         file: "_content/her-console.json"
         fields:
-          - { label: "Project Tag", name: "tag", widget: "string" }
-          - { label: "Title", name: "title", widget: "string" }
-          - { label: "Description", name: "description", widget: "text" }
-          - { label: "Meta - Material", name: "material", widget: "string" }
-          - { label: "Meta - Finish / Top", name: "finish", widget: "string" }
-          - { label: "Meta - Feature", name: "feature", widget: "string" }
-          - { label: "Story Label", name: "story_label", widget: "string" }
-          - label: "Story Paragraphs"
+          - { label: "Hero Image",           name: "hero_image",           widget: "image" }
+          - { label: "Project Tag",          name: "project_tag",          widget: "string" }
+          - { label: "Title",                name: "title",                widget: "string" }
+          - { label: "Meta — Material Label", name: "meta_material_label", widget: "string" }
+          - { label: "Meta — Material Value", name: "meta_material_value", widget: "string" }
+          - { label: "Meta — Top Label",      name: "meta_top_label",      widget: "string" }
+          - { label: "Meta — Top Value",      name: "meta_top_value",      widget: "string" }
+          - { label: "Meta — Feature Label",  name: "meta_feature_label",  widget: "string" }
+          - { label: "Meta — Feature Value",  name: "meta_feature_value",  widget: "string" }
+          - { label: "Story — Section Label", name: "story_label",         widget: "string" }
+          - label: "Story — Paragraphs"
             name: "story"
             widget: "list"
             field: { label: "Paragraph", name: "paragraph", widget: "text" }
-          - { label: "Detail 1 - Label", name: "detail_1_label", widget: "string" }
-          - { label: "Detail 1 - Value", name: "detail_1_value", widget: "text" }
-          - { label: "Detail 2 - Label", name: "detail_2_label", widget: "string" }
-          - { label: "Detail 2 - Value", name: "detail_2_value", widget: "text" }
-          - { label: "Detail 3 - Label", name: "detail_3_label", widget: "string" }
-          - { label: "Detail 3 - Value", name: "detail_3_value", widget: "text" }
-          - { label: "Hero Image", name: "hero_image", widget: "image" }
-          - { label: "Photo 1 (Full width - skyline)", name: "photo_1", widget: "image" }
-          - { label: "Photo 2 (Left panel - tall)", name: "photo_2", widget: "image" }
-          - { label: "Photo 3 (Right panel - top)", name: "photo_3", widget: "image" }
-          - { label: "Photo 4 (Right panel - bottom)", name: "photo_4", widget: "image" }
-          - { label: "Photo 5 (3-col grid - left)", name: "photo_5", widget: "image" }
-          - { label: "Photo 6 (3-col grid - center)", name: "photo_6", widget: "image" }
-          - { label: "Photo 7 (3-col grid - right)", name: "photo_7", widget: "image" }
-          - { label: "Photo 8 (Full width - interior reveal)", name: "photo_8", widget: "image" }
-          - { label: "Photo 9 (2-col grid - left)", name: "photo_9", widget: "image" }
-          - { label: "Photo 10 (2-col grid - right)", name: "photo_10", widget: "image" }
-          - { label: "Photo 11 (Final full width)", name: "photo_11", widget: "image" }
+          - { label: "Detail 1 — Label", name: "detail_1_label", widget: "string" }
+          - { label: "Detail 1 — Text",  name: "detail_1_value", widget: "text" }
+          - { label: "Detail 2 — Label", name: "detail_2_label", widget: "string" }
+          - { label: "Detail 2 — Text",  name: "detail_2_value", widget: "text" }
+          - { label: "Detail 3 — Label", name: "detail_3_label", widget: "string" }
+          - { label: "Detail 3 — Text",  name: "detail_3_value", widget: "text" }
+          - { label: "CTA — Headline",          name: "cta_headline",    widget: "string" }
+          - { label: "CTA — Headline (italic)", name: "cta_headline_em", widget: "string" }
+          - { label: "CTA — Subtext",           name: "cta_sub",         widget: "string" }
+          - { label: "Gallery — Photo 1 (full width, skyline)",  name: "photo_1",  widget: "image" }
+          - { label: "Gallery — Photo 2 (left panel tall)",      name: "photo_2",  widget: "image" }
+          - { label: "Gallery — Photo 3 (right panel top)",      name: "photo_3",  widget: "image" }
+          - { label: "Gallery — Photo 4 (right panel bottom)",   name: "photo_4",  widget: "image" }
+          - { label: "Gallery — Photo 5 (3-col left)",           name: "photo_5",  widget: "image" }
+          - { label: "Gallery — Photo 6 (3-col center)",         name: "photo_6",  widget: "image" }
+          - { label: "Gallery — Photo 7 (3-col right)",          name: "photo_7",  widget: "image" }
+          - { label: "Gallery — Photo 8 (full width interior)",  name: "photo_8",  widget: "image" }
+          - { label: "Gallery — Photo 9 (2-col left)",           name: "photo_9",  widget: "image" }
+          - { label: "Gallery — Photo 10 (2-col right)",         name: "photo_10", widget: "image" }
+          - { label: "Gallery — Photo 11 (final full width)",    name: "photo_11", widget: "image" }
+          - { label: "Description (legacy)", name: "description", widget: "text",   required: false }
+          - { label: "Material (legacy)",    name: "material",    widget: "string", required: false }
+          - { label: "Finish (legacy)",      name: "finish",      widget: "string", required: false }
+          - { label: "Feature (legacy)",     name: "feature",     widget: "string", required: false }
 
-      - label: "Murphy Bed - Jenna & Bobby"
-        name: "murphy_bed"
-        file: "_content/projects/murphy-bed.json"
-        fields:
-          - { label: "Project Tag", name: "tag", widget: "string" }
-          - { label: "Title", name: "title", widget: "string" }
-          - { label: "Category", name: "category", widget: "string" }
-          - { label: "Location", name: "location", widget: "string" }
-          - { label: "Description", name: "description", widget: "text" }
-          - { label: "Meta 1 - Label", name: "meta_1_label", widget: "string" }
-          - { label: "Meta 1 - Value", name: "meta_1_value", widget: "string" }
-          - { label: "Meta 2 - Label", name: "meta_2_label", widget: "string" }
-          - { label: "Meta 2 - Value", name: "meta_2_value", widget: "string" }
-          - { label: "Meta 3 - Label", name: "meta_3_label", widget: "string" }
-          - { label: "Meta 3 - Value", name: "meta_3_value", widget: "string" }
-          - { label: "Story Label", name: "story_label", widget: "string" }
-          - label: "Story Paragraphs"
-            name: "story"
-            widget: "list"
-            field: { label: "Paragraph", name: "paragraph", widget: "text" }
-          - { label: "Hero Image", name: "hero_image", widget: "image" }
-          - { label: "Cover Image (Work grid thumbnail)", name: "cover", widget: "image" }
-          - label: "Photos"
-            name: "photos"
-            widget: "list"
-            field: { label: "Photo", name: "photo", widget: "image" }
+  # ─────────────────────────────────────────────
+  # WORK / PROJECTS (folder collection)
+  # ─────────────────────────────────────────────
+  - name: "work"
+    label: "🔨 Work / Projects"
+    folder: "_content/projects"
+    create: true
+    extension: "json"
+    format: "json"
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title",        name: "title",       widget: "string" }
+      - { label: "Project Tag (e.g. Murphy Bed · Brooklyn)", name: "project_tag", widget: "string" }
+      - { label: "Category",     name: "category",    widget: "string" }
+      - { label: "Location",     name: "location",    widget: "string" }
+      - { label: "Description",  name: "description", widget: "text" }
+      - { label: "Meta 1 — Label", name: "meta_location_label", widget: "string" }
+      - { label: "Meta 1 — Value", name: "meta_location_value", widget: "string" }
+      - { label: "Meta 2 — Label", name: "meta_material_label", widget: "string" }
+      - { label: "Meta 2 — Value", name: "meta_material_value", widget: "string" }
+      - { label: "Meta 3 — Label", name: "meta_scope_label",    widget: "string" }
+      - { label: "Meta 3 — Value", name: "meta_scope_value",    widget: "string" }
+      - { label: "Story — Section Label", name: "story_label", widget: "string" }
+      - label: "Story — Paragraphs"
+        name: "story"
+        widget: "list"
+        field: { label: "Paragraph", name: "paragraph", widget: "text" }
+      - { label: "CTA — Headline",          name: "cta_headline",    widget: "string" }
+      - { label: "CTA — Headline (italic)", name: "cta_headline_em", widget: "string" }
+      - { label: "CTA — Subtext",           name: "cta_sub",         widget: "string" }
+      - { label: "Hero Image",  name: "hero_image", widget: "image" }
+      - { label: "Cover Image (work grid thumbnail)", name: "cover", widget: "image" }
+      - label: "Gallery Photos"
+        name: "photos"
+        widget: "list"
+        field: { label: "Photo", name: "photo", widget: "image" }

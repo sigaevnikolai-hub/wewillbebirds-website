@@ -72,7 +72,10 @@
     <div class="contact-grid">
       <div>
         <p class="contact-label" id="txt-contact-label">Get in touch</p>
-        <h1 class="contact-title"><span id="txt-contact-title-1">Tell us about</span><br /><span id="txt-contact-title-2">your <em>project.</em></span></h1>
+        <h1 class="contact-title">
+          <span id="txt-contact-title-1">Tell us about</span><br />
+          <span id="txt-contact-title-2">your </span><em id="txt-contact-title-em">project.</em>
+        </h1>
         <p class="contact-note" id="txt-contact-note">
           We work with a limited number of clients at a time. 
           If you have a space that deserves something special, 
@@ -80,42 +83,48 @@
         </p>
         <div class="contact-direct">
           <div class="contact-direct-item">
-            <span class="contact-direct-label">Phone</span>
-            <span class="contact-direct-value"><a id="txt-contact-phone-link" href="tel:+13477491459" id="contact-phone-link">347-749-1459</a></span>
+            <span class="contact-direct-label" id="txt-contact-phone-label">Phone</span>
+            <span class="contact-direct-value">
+              <a id="link-contact-phone" href="tel:+13477491459">347-749-1459</a>
+            </span>
           </div>
           <div class="contact-direct-item">
-            <span class="contact-direct-label">Email</span>
-            <span class="contact-direct-value"><a id="txt-contact-email-link" href="mailto:nikolay@wewillbebirds.com">nikolay@wewillbebirds.com</a></span>
+            <span class="contact-direct-label" id="txt-contact-email-label">Email</span>
+            <span class="contact-direct-value">
+              <a id="link-contact-email" href="mailto:nikolay@wewillbebirds.com">nikolay@wewillbebirds.com</a>
+            </span>
           </div>
           <div class="contact-direct-item">
-            <span class="contact-direct-label">Instagram</span>
-            <span class="contact-direct-value"><a id="txt-contact-instagram-link" href="https://instagram.com/wewillbebirds" target="_blank">@wewillbebirds</a></span>
+            <span class="contact-direct-label" id="txt-contact-instagram-label">Instagram</span>
+            <span class="contact-direct-value">
+              <a id="link-contact-instagram" href="https://instagram.com/wewillbebirds" target="_blank">@wewillbebirds</a>
+            </span>
           </div>
           <div class="contact-direct-item">
-            <span class="contact-direct-label">Studio</span>
-            <span class="contact-direct-value" id="txt-contact-studio">140 58th Street, Brooklyn, NY</span>
+            <span class="contact-direct-label" id="txt-contact-studio-label">Studio</span>
+            <span class="contact-direct-value" id="txt-contact-studio-value">140 58th Street, Brooklyn, NY</span>
           </div>
         </div>
       </div>
 
       <form class="form" name="contact" method="POST" data-netlify="true">
         <div class="form-field">
-          <label class="form-label" for="name">Your name</label>
+          <label class="form-label" id="txt-form-name-label" for="name">Your name</label>
           <input class="form-input" type="text" id="name" name="name" placeholder="First and last name" required />
         </div>
         <div class="form-field">
-          <label class="form-label" for="email">Email</label>
+          <label class="form-label" id="txt-form-email-label" for="email">Email</label>
           <input class="form-input" type="email" id="email" name="email" placeholder="you@example.com" required />
         </div>
         <div class="form-field">
-          <label class="form-label" for="phone">Phone</label>
+          <label class="form-label" id="txt-form-phone-label" for="phone">Phone</label>
           <input class="form-input" type="tel" id="phone" name="phone" placeholder="Optional" />
         </div>
         <div class="form-field">
-          <label class="form-label" for="project">Tell us about your project</label>
+          <label class="form-label" id="txt-form-project-label" for="project">Tell us about your project</label>
           <textarea class="form-textarea" id="project" name="project" placeholder="What are you looking to build? Space, scope, timeline — anything helps." required></textarea>
         </div>
-        <button type="submit" class="form-submit">Send message</button>
+        <button type="submit" class="form-submit" id="btn-form-submit">Send message</button>
       </form>
     </div>
   </div>
@@ -127,32 +136,55 @@
         <a href="https://instagram.com/wewillbebirds" target="_blank">Instagram</a>
         <a href="mailto:nikolay@wewillbebirds.com">Email</a>
       </div>
-      <span class="footer-copy">© 2026 Wewillbebirds Inc. Brooklyn, NY</span>
+      <span class="footer-copy" id="txt-footer-copy">© 2026 Wewillbebirds Inc. Brooklyn, NY</span>
     </div>
   </footer>
 
   <script>
-    fetch('/_content/contact.json').then(function(r){return r.json();}).then(function(d){
-      if(d.label) document.getElementById('txt-contact-label').textContent = d.label;
+    Promise.all([
+      fetch('/_content/contact.json').then(function(r){return r.json();}),
+      fetch('/_content/global.json').then(function(r){return r.json();})
+    ]).then(function(res){
+      var d = res[0], g = res[1];
+      // Intro text
+      if(d.label)      document.getElementById('txt-contact-label').textContent    = d.label;
       if(d.title_line1) document.getElementById('txt-contact-title-1').textContent = d.title_line1;
-      if(d.title_line2) document.getElementById('txt-contact-title-2').innerHTML = d.title_line2;
-      if(d.note) document.getElementById('txt-contact-note').textContent = d.note;
-      if(d.phone) {
-        var phoneLink = document.getElementById('txt-contact-phone-link');
-        phoneLink.textContent = d.phone;
-        phoneLink.href = 'tel:+1' + d.phone.replace(/\D/g,'');
+      if(d.title_line2) document.getElementById('txt-contact-title-2').textContent = d.title_line2;
+      if(d.title_em)    document.getElementById('txt-contact-title-em').textContent = d.title_em;
+      if(d.note)        document.getElementById('txt-contact-note').textContent    = d.note;
+      // Contact details — update both visible text and href
+      if(d.phone_label) document.getElementById('txt-contact-phone-label').textContent = d.phone_label;
+      if(d.phone_value) {
+        var phoneLink = document.getElementById('link-contact-phone');
+        phoneLink.textContent = d.phone_value;
+        if(d.phone_href) phoneLink.href = d.phone_href;
       }
-      if(d.email) {
-        var emailLink = document.getElementById('txt-contact-email-link');
-        emailLink.textContent = d.email;
-        emailLink.href = 'mailto:' + d.email;
+      if(d.email_label) document.getElementById('txt-contact-email-label').textContent = d.email_label;
+      if(d.email_value) {
+        var emailLink = document.getElementById('link-contact-email');
+        emailLink.textContent = d.email_value;
+        if(d.email_href) emailLink.href = d.email_href;
       }
-      if(d.instagram) {
-        var igLink = document.getElementById('txt-contact-instagram-link');
-        igLink.textContent = d.instagram;
-        igLink.href = 'https://instagram.com/' + d.instagram.replace('@','');
+      if(d.instagram_label) document.getElementById('txt-contact-instagram-label').textContent = d.instagram_label;
+      if(d.instagram_value) {
+        var igLink = document.getElementById('link-contact-instagram');
+        igLink.textContent = d.instagram_value;
+        if(d.instagram_href) igLink.href = d.instagram_href;
       }
-      if(d.studio) document.getElementById('txt-contact-studio').textContent = d.studio;
+      if(d.studio_label) document.getElementById('txt-contact-studio-label').textContent = d.studio_label;
+      if(d.studio_value) document.getElementById('txt-contact-studio-value').textContent = d.studio_value;
+      // Form labels + placeholders
+      if(d.form_name_label)        document.getElementById('txt-form-name-label').textContent    = d.form_name_label;
+      if(d.form_name_placeholder)  document.getElementById('name').placeholder                  = d.form_name_placeholder;
+      if(d.form_email_label)       document.getElementById('txt-form-email-label').textContent   = d.form_email_label;
+      if(d.form_email_placeholder) document.getElementById('email').placeholder                 = d.form_email_placeholder;
+      if(d.form_phone_label)       document.getElementById('txt-form-phone-label').textContent   = d.form_phone_label;
+      if(d.form_phone_placeholder) document.getElementById('phone').placeholder                 = d.form_phone_placeholder;
+      if(d.form_project_label)        document.getElementById('txt-form-project-label').textContent = d.form_project_label;
+      if(d.form_project_placeholder)  document.getElementById('project').placeholder             = d.form_project_placeholder;
+      if(d.form_submit_text) document.getElementById('btn-form-submit').textContent = d.form_submit_text;
+      // Footer (global)
+      if(g.footer_copy) document.getElementById('txt-footer-copy').textContent = g.footer_copy;
     }).catch(function(){});
   </script>
 </body>

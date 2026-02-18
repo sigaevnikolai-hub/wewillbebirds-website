@@ -17,7 +17,8 @@
     .about-body { font-size: 16px; color: var(--white-dim); line-height: 1.85; }
     .about-body p { margin-bottom: 24px; }
     .about-right { padding-top: 80px; }
-    .about-image { aspect-ratio: 3/4; background: var(--card); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-family: var(--font-serif); font-size: 14px; color: var(--white-muted); letter-spacing: 0.06em; margin-bottom: 48px; }
+    .about-image { aspect-ratio: 3/4; background: var(--card); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-family: var(--font-serif); font-size: 14px; color: var(--white-muted); letter-spacing: 0.06em; margin-bottom: 48px; position: relative; overflow: hidden; padding: 0; }
+    .about-image-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: none; }
     .about-details { border-top: 1px solid var(--border); padding-top: 32px; }
     .about-detail { display: flex; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid var(--border); }
     .about-detail-label { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--white-muted); }
@@ -39,24 +40,28 @@
     <div class="about-grid">
       <div class="about-left">
         <p class="about-label" id="txt-about-label">The Studio</p>
-        <h1 class="about-title"><span id="txt-about-headline">Built for clients who want a</span><br /><em id="txt-about-headline-em">vision.</em></h1>
+        <h1 class="about-title">
+          <span id="txt-about-title-1">Built for clients</span><br />
+          <span id="txt-about-title-2">who want a</span><br />
+          <em id="txt-about-title-em">vision.</em>
+        </h1>
         <div class="about-body">
-          <p id="txt-about-bio-1">
+          <p id="txt-about-body-1">
             Wewillbebirds is a custom millwork studio based in Brooklyn, New York. 
             We work with homeowners, architects, and designers on residential and 
             commercial projects across the city.
           </p>
-          <p id="txt-about-bio-2">
+          <p id="txt-about-body-2">
             Every piece is built to spec, in-house, with the hardware and finishes 
             we believe in. We use Blum hardware because it performs. 
             We finish with Rubio Monocoat and oil-based polyurethane because 
             anything less isn't something we're willing to deliver.
           </p>
-          <p id="txt-about-bio-3">
+          <p id="txt-about-body-3">
             We don't compete on price. We compete on the quality of the result — 
             and the confidence that the design is right.
           </p>
-          <p id="txt-about-bio-4">
+          <p id="txt-about-body-4">
             If you know what you want and you want it done properly, 
             this is where you should be.
           </p>
@@ -64,27 +69,30 @@
       </div>
 
       <div class="about-right">
-        <div class="about-image">Nikolay Sigaev — Portrait</div>
+        <div class="about-image" id="about-image-wrap">
+          <span id="txt-about-portrait-placeholder">Nikolay Sigaev — Portrait</span>
+          <img id="img-about-portrait" class="about-image-photo" src="" alt="Nikolay Sigaev" />
+        </div>
         <div class="about-details">
           <div class="about-detail">
-            <span class="about-detail-label">Location</span>
-            <span class="about-detail-value" id="txt-about-location">Brooklyn, New York</span>
+            <span class="about-detail-label" id="txt-about-detail-location-label">Location</span>
+            <span class="about-detail-value" id="txt-about-detail-location-value">Brooklyn, New York</span>
           </div>
           <div class="about-detail">
-            <span class="about-detail-label">Founded</span>
-            <span class="about-detail-value" id="txt-about-founded">Brooklyn, 2020</span>
+            <span class="about-detail-label" id="txt-about-detail-founded-label">Founded</span>
+            <span class="about-detail-value" id="txt-about-detail-founded-value">Brooklyn, 2020</span>
           </div>
           <div class="about-detail">
-            <span class="about-detail-label">Specialties</span>
-            <span class="about-detail-value" id="txt-about-specialties">Custom millwork, cabinetry,<br />architectural interiors</span>
+            <span class="about-detail-label" id="txt-about-detail-specialties-label">Specialties</span>
+            <span class="about-detail-value" id="txt-about-detail-specialties-value">Custom millwork, cabinetry,<br />architectural interiors</span>
           </div>
           <div class="about-detail">
-            <span class="about-detail-label">Minimum Project</span>
-            <span class="about-detail-value" id="txt-about-minimum">$8,000</span>
+            <span class="about-detail-label" id="txt-about-detail-minimum-label">Minimum Project</span>
+            <span class="about-detail-value" id="txt-about-detail-minimum-value">$8,000</span>
           </div>
           <div class="about-detail">
-            <span class="about-detail-label">Service Area</span>
-            <span class="about-detail-value" id="txt-about-service-area">New York City</span>
+            <span class="about-detail-label" id="txt-about-detail-service-label">Service Area</span>
+            <span class="about-detail-value" id="txt-about-detail-service-value">New York City</span>
           </div>
         </div>
       </div>
@@ -98,24 +106,47 @@
         <a href="https://instagram.com/wewillbebirds" target="_blank">Instagram</a>
         <a href="mailto:nikolay@wewillbebirds.com">Email</a>
       </div>
-      <span class="footer-copy">© 2026 Wewillbebirds Inc. Brooklyn, NY</span>
+      <span class="footer-copy" id="txt-footer-copy">© 2026 Wewillbebirds Inc. Brooklyn, NY</span>
     </div>
   </footer>
 
   <script>
-    fetch('/_content/about.json').then(function(r){return r.json();}).then(function(d){
-      if(d.label) document.getElementById('txt-about-label').textContent = d.label;
-      if(d.headline) document.getElementById('txt-about-headline').textContent = d.headline;
-      if(d.headline_em) document.getElementById('txt-about-headline-em').textContent = d.headline_em;
-      if(d.bio_1) document.getElementById('txt-about-bio-1').textContent = d.bio_1;
-      if(d.bio_2) document.getElementById('txt-about-bio-2').textContent = d.bio_2;
-      if(d.bio_3) document.getElementById('txt-about-bio-3').textContent = d.bio_3;
-      if(d.bio_4) document.getElementById('txt-about-bio-4').textContent = d.bio_4;
-      if(d.detail_location) document.getElementById('txt-about-location').textContent = d.detail_location;
-      if(d.detail_founded) document.getElementById('txt-about-founded').textContent = d.detail_founded;
-      if(d.detail_specialties) document.getElementById('txt-about-specialties').textContent = d.detail_specialties;
-      if(d.detail_minimum) document.getElementById('txt-about-minimum').textContent = d.detail_minimum;
-      if(d.detail_service_area) document.getElementById('txt-about-service-area').textContent = d.detail_service_area;
+    Promise.all([
+      fetch('/_content/about.json').then(function(r){return r.json();}),
+      fetch('/_content/global.json').then(function(r){return r.json();})
+    ]).then(function(res){
+      var d = res[0], g = res[1];
+      // Label + title
+      if(d.label)      document.getElementById('txt-about-label').textContent    = d.label;
+      if(d.title_line1) document.getElementById('txt-about-title-1').textContent = d.title_line1;
+      if(d.title_line2) document.getElementById('txt-about-title-2').textContent = d.title_line2;
+      if(d.title_em)    document.getElementById('txt-about-title-em').textContent = d.title_em;
+      // Body paragraphs
+      if(d.body_1) document.getElementById('txt-about-body-1').textContent = d.body_1;
+      if(d.body_2) document.getElementById('txt-about-body-2').textContent = d.body_2;
+      if(d.body_3) document.getElementById('txt-about-body-3').textContent = d.body_3;
+      if(d.body_4) document.getElementById('txt-about-body-4').textContent = d.body_4;
+      // Portrait image
+      if(d.portrait_image) {
+        var img = document.getElementById('img-about-portrait');
+        img.src = d.portrait_image;
+        img.style.display = 'block';
+        document.getElementById('txt-about-portrait-placeholder').style.display = 'none';
+      }
+      if(d.portrait_placeholder) document.getElementById('txt-about-portrait-placeholder').textContent = d.portrait_placeholder;
+      // Detail rows
+      if(d.detail_location_label)     document.getElementById('txt-about-detail-location-label').textContent     = d.detail_location_label;
+      if(d.detail_location_value)     document.getElementById('txt-about-detail-location-value').textContent     = d.detail_location_value;
+      if(d.detail_founded_label)      document.getElementById('txt-about-detail-founded-label').textContent      = d.detail_founded_label;
+      if(d.detail_founded_value)      document.getElementById('txt-about-detail-founded-value').textContent      = d.detail_founded_value;
+      if(d.detail_specialties_label)  document.getElementById('txt-about-detail-specialties-label').textContent  = d.detail_specialties_label;
+      if(d.detail_specialties_value)  document.getElementById('txt-about-detail-specialties-value').textContent  = d.detail_specialties_value;
+      if(d.detail_minimum_label)      document.getElementById('txt-about-detail-minimum-label').textContent      = d.detail_minimum_label;
+      if(d.detail_minimum_value)      document.getElementById('txt-about-detail-minimum-value').textContent      = d.detail_minimum_value;
+      if(d.detail_service_label)      document.getElementById('txt-about-detail-service-label').textContent      = d.detail_service_label;
+      if(d.detail_service_value)      document.getElementById('txt-about-detail-service-value').textContent      = d.detail_service_value;
+      // Footer (global)
+      if(g.footer_copy) document.getElementById('txt-footer-copy').textContent = g.footer_copy;
     }).catch(function(){});
   </script>
 </body>

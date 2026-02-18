@@ -195,15 +195,15 @@
       <h1 class="project-hero-title" id="txt-her-title">HER Console</h1>
       <div class="project-meta">
         <div class="project-meta-item">
-          <span class="project-meta-label">Material</span>
+          <span class="project-meta-label" id="txt-her-meta-material-label">Material</span>
           <span class="project-meta-value" id="txt-her-material">Lacquered MDF</span>
         </div>
         <div class="project-meta-item">
-          <span class="project-meta-label">Top</span>
+          <span class="project-meta-label" id="txt-her-meta-top-label">Top</span>
           <span class="project-meta-value" id="txt-her-finish">Glass</span>
         </div>
         <div class="project-meta-item">
-          <span class="project-meta-label">Feature</span>
+          <span class="project-meta-label" id="txt-her-meta-feature-label">Feature</span>
           <span class="project-meta-value" id="txt-her-feature">Painted interiors, brass trim, fluted fronts</span>
         </div>
       </div>
@@ -298,8 +298,8 @@
   <!-- CTA -->
   <section class="cta">
     <div class="container">
-      <h2 class="cta-headline">Have a project<br /><em>in mind?</em></h2>
-      <p class="cta-sub">We work with a limited number of clients at a time.</p>
+      <h2 class="cta-headline"><span id="txt-her-cta-headline">Have a project</span><br /><em id="txt-her-cta-em">in mind?</em></h2>
+      <p class="cta-sub" id="txt-her-cta-sub">We work with a limited number of clients at a time.</p>
       <a href="contact.html" class="btn-primary">Get in touch</a>
     </div>
   </section>
@@ -311,12 +311,16 @@
         <a href="https://instagram.com/wewillbebirds" target="_blank">Instagram</a>
         <a href="mailto:nikolay@wewillbebirds.com">Email</a>
       </div>
-      <span class="footer-copy">© 2026 Wewillbebirds Inc. Brooklyn, NY</span>
+      <span class="footer-copy" id="txt-footer-copy">© 2026 Wewillbebirds Inc. Brooklyn, NY</span>
     </div>
   </footer>
 
   <script>
-    fetch('/_content/her-console.json').then(function(r){return r.json();}).then(function(d){
+    Promise.all([
+      fetch('/_content/her-console.json').then(function(r){return r.json();}),
+      fetch('/_content/global.json').then(function(r){return r.json();})
+    ]).then(function(res){
+      var d = res[0], g = res[1];
       // Images
       var imgMap = {
         'img-her-hero': d.hero_image,
@@ -336,18 +340,24 @@
         var el = document.getElementById(id);
         if(el && imgMap[id]) el.src = imgMap[id];
       });
-      // Text
-      if(d.tag) document.getElementById('txt-her-tag').textContent = d.tag;
-      if(d.title) document.getElementById('txt-her-title').textContent = d.title;
-      if(d.material) document.getElementById('txt-her-material').textContent = d.material;
-      if(d.finish) document.getElementById('txt-her-finish').textContent = d.finish;
-      if(d.feature) document.getElementById('txt-her-feature').textContent = d.feature;
+      // Hero text
+      if(d.project_tag) document.getElementById('txt-her-tag').textContent   = d.project_tag;
+      if(d.title)       document.getElementById('txt-her-title').textContent  = d.title;
+      // Meta labels
+      if(d.meta_material_label) document.getElementById('txt-her-meta-material-label').textContent = d.meta_material_label;
+      if(d.meta_top_label)      document.getElementById('txt-her-meta-top-label').textContent      = d.meta_top_label;
+      if(d.meta_feature_label)  document.getElementById('txt-her-meta-feature-label').textContent  = d.meta_feature_label;
+      // Meta values
+      if(d.meta_material_value) document.getElementById('txt-her-material').textContent = d.meta_material_value;
+      if(d.meta_top_value)      document.getElementById('txt-her-finish').textContent   = d.meta_top_value;
+      if(d.meta_feature_value)  document.getElementById('txt-her-feature').textContent  = d.meta_feature_value;
+      // Story label
       if(d.story_label) document.getElementById('txt-her-story-label').textContent = d.story_label;
-      // Story paragraphs — rebuild from array if present
+      // Story paragraphs — rebuild from array
       if(d.story && Array.isArray(d.story) && d.story.length) {
         var container = document.getElementById('txt-her-story-container');
         container.innerHTML = '';
-        d.story.forEach(function(para, i){
+        d.story.forEach(function(para){
           var p = document.createElement('p');
           p.textContent = para;
           container.appendChild(p);
@@ -360,6 +370,12 @@
       if(d.detail_2_value) document.getElementById('txt-her-detail-2-value').textContent = d.detail_2_value;
       if(d.detail_3_label) document.getElementById('txt-her-detail-3-label').textContent = d.detail_3_label;
       if(d.detail_3_value) document.getElementById('txt-her-detail-3-value').textContent = d.detail_3_value;
+      // CTA
+      if(d.cta_headline)    document.getElementById('txt-her-cta-headline').textContent = d.cta_headline;
+      if(d.cta_headline_em) document.getElementById('txt-her-cta-em').textContent       = d.cta_headline_em;
+      if(d.cta_sub)         document.getElementById('txt-her-cta-sub').textContent      = d.cta_sub;
+      // Footer (global)
+      if(g.footer_copy) document.getElementById('txt-footer-copy').textContent = g.footer_copy;
     }).catch(function(){});
   </script>
 

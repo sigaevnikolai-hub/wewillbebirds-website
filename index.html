@@ -112,29 +112,41 @@
         <a href="https://instagram.com/wewillbebirds" target="_blank">Instagram</a>
         <a href="mailto:nikolay@wewillbebirds.com">Email</a>
       </div>
-      <span class="footer-copy">© 2026 Wewillbebirds Inc. Brooklyn, NY</span>
+      <span class="footer-copy" id="txt-footer-copy">© 2026 Wewillbebirds Inc. Brooklyn, NY</span>
     </div>
   </footer>
 
   <script>
-    fetch('/_content/home.json').then(function(r){return r.json();}).then(function(d){
+    Promise.all([
+      fetch('/_content/home.json').then(function(r){return r.json();}),
+      fetch('/_content/global.json').then(function(r){return r.json();})
+    ]).then(function(res){
+      var d = res[0], g = res[1];
+      // Image
       if(d.featured_image) document.getElementById('img-featured').src = d.featured_image;
+      // Hero
       if(d.hero_headline) document.getElementById('txt-hero-headline').textContent = d.hero_headline;
-      if(d.hero_subline) document.getElementById('txt-hero-subline').textContent = d.hero_subline;
+      if(d.hero_subline)  document.getElementById('txt-hero-subline').textContent  = d.hero_subline;
+      // Statement
       if(d.statement) document.getElementById('txt-statement').textContent = d.statement;
-      if(d.featured_label) document.getElementById('txt-featured-label').textContent = d.featured_label;
-      if(d.featured_title) document.getElementById('txt-featured-title').textContent = d.featured_title;
-      if(d.featured_desc) document.getElementById('txt-featured-desc').textContent = d.featured_desc;
+      // Featured section
+      if(d.featured_label)        document.getElementById('txt-featured-label').textContent       = d.featured_label;
+      if(d.featured_project_title) document.getElementById('txt-featured-title').textContent      = d.featured_project_title;
+      if(d.featured_project_desc)  document.getElementById('txt-featured-desc').textContent       = d.featured_project_desc;
+      // Services
+      if(d.service_1_title) document.getElementById('txt-service-1-name').textContent = d.service_1_title;
+      if(d.service_1_desc)  document.getElementById('txt-service-1-desc').textContent = d.service_1_desc;
+      if(d.service_2_title) document.getElementById('txt-service-2-name').textContent = d.service_2_title;
+      if(d.service_2_desc)  document.getElementById('txt-service-2-desc').textContent = d.service_2_desc;
+      if(d.service_3_title) document.getElementById('txt-service-3-name').textContent = d.service_3_title;
+      if(d.service_3_desc)  document.getElementById('txt-service-3-desc').textContent = d.service_3_desc;
+      if(d.service_4_title) document.getElementById('txt-service-4-name').textContent = d.service_4_title;
+      if(d.service_4_desc)  document.getElementById('txt-service-4-desc').textContent = d.service_4_desc;
+      // CTA
       if(d.cta_headline) document.getElementById('txt-cta-headline').textContent = d.cta_headline;
-      if(d.cta_subtext) document.getElementById('txt-cta-sub').textContent = d.cta_subtext;
-      if(d.service_1_name) document.getElementById('txt-service-1-name').textContent = d.service_1_name;
-      if(d.service_1_desc) document.getElementById('txt-service-1-desc').textContent = d.service_1_desc;
-      if(d.service_2_name) document.getElementById('txt-service-2-name').textContent = d.service_2_name;
-      if(d.service_2_desc) document.getElementById('txt-service-2-desc').textContent = d.service_2_desc;
-      if(d.service_3_name) document.getElementById('txt-service-3-name').textContent = d.service_3_name;
-      if(d.service_3_desc) document.getElementById('txt-service-3-desc').textContent = d.service_3_desc;
-      if(d.service_4_name) document.getElementById('txt-service-4-name').textContent = d.service_4_name;
-      if(d.service_4_desc) document.getElementById('txt-service-4-desc').textContent = d.service_4_desc;
+      if(d.cta_sub)      document.getElementById('txt-cta-sub').textContent      = d.cta_sub;
+      // Footer (global)
+      if(g.footer_copy) document.getElementById('txt-footer-copy').textContent = g.footer_copy;
     }).catch(function(){});
   </script>
 
