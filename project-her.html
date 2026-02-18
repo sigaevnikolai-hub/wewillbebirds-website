@@ -191,20 +191,20 @@
     <img id="img-her-hero" src="assets/her/install/her-10.jpg" alt="HER Console" class="project-hero-img" />
     <div class="project-hero-overlay"></div>
     <div class="project-hero-content">
-      <p class="project-tag">Console · Manhattan</p>
-      <h1 class="project-hero-title">HER Console</h1>
+      <p class="project-tag" id="txt-her-tag">Console · Manhattan</p>
+      <h1 class="project-hero-title" id="txt-her-title">HER Console</h1>
       <div class="project-meta">
         <div class="project-meta-item">
           <span class="project-meta-label">Material</span>
-          <span class="project-meta-value">Lacquered MDF</span>
+          <span class="project-meta-value" id="txt-her-material">Lacquered MDF</span>
         </div>
         <div class="project-meta-item">
           <span class="project-meta-label">Top</span>
-          <span class="project-meta-value">Glass</span>
+          <span class="project-meta-value" id="txt-her-finish">Glass</span>
         </div>
         <div class="project-meta-item">
           <span class="project-meta-label">Feature</span>
-          <span class="project-meta-value">Painted interiors, brass trim, fluted fronts</span>
+          <span class="project-meta-value" id="txt-her-feature">Painted interiors, brass trim, fluted fronts</span>
         </div>
       </div>
     </div>
@@ -218,13 +218,13 @@
   <!-- STORY -->
   <section class="story-section">
     <div class="story-inner">
-      <p class="story-label">The Story</p>
-      <div class="story-text">
-        <p>I don't really have project favorites. But some leave a dent in my heart. This one is that.</p>
-        <p>From the first drawing to the final install, I was excited to make it real. I believe results like this only happen when client and builder truly understand each other — when there's trust, freedom, and real communication on both sides.</p>
-        <p>Smooth and sleek on the outside. Fun and rich on the inside — like a well-tailored Paul Smith suit.</p>
-        <p>And a huge mirror with a precise cutout to fit the console. No buttons. Light appears with a glide of your hand along the curve. All sensors hidden, tracking motion in silence.</p>
-        <p>Really proud of this one. Will miss her.</p>
+      <p class="story-label" id="txt-her-story-label">The Story</p>
+      <div class="story-text" id="txt-her-story-container">
+        <p id="txt-her-story-1">I don't really have project favorites. But some leave a dent in my heart. This one is that.</p>
+        <p id="txt-her-story-2">From the first drawing to the final install, I was excited to make it real. I believe results like this only happen when client and builder truly understand each other — when there's trust, freedom, and real communication on both sides.</p>
+        <p id="txt-her-story-3">Smooth and sleek on the outside. Fun and rich on the inside — like a well-tailored Paul Smith suit.</p>
+        <p id="txt-her-story-4">And a huge mirror with a precise cutout to fit the console. No buttons. Light appears with a glide of your hand along the curve. All sensors hidden, tracking motion in silence.</p>
+        <p id="txt-her-story-5">Really proud of this one. Will miss her.</p>
       </div>
     </div>
   </section>
@@ -233,16 +233,16 @@
   <div class="detail-callout">
     <div class="detail-grid">
       <div class="detail-item">
-        <p class="detail-label">The exterior</p>
-        <p class="detail-value">Fluted lacquered fronts. Glass top. Every surface flush — nothing interrupts the line.</p>
+        <p class="detail-label" id="txt-her-detail-1-label">The exterior</p>
+        <p class="detail-value" id="txt-her-detail-1-value">Fluted lacquered fronts. Glass top. Every surface flush — nothing interrupts the line.</p>
       </div>
       <div class="detail-item">
-        <p class="detail-label">The mirror</p>
-        <p class="detail-value">Custom cutout to the millimeter. The console and mirror read as one object.</p>
+        <p class="detail-label" id="txt-her-detail-2-label">The mirror</p>
+        <p class="detail-value" id="txt-her-detail-2-value">Custom cutout to the millimeter. The console and mirror read as one object.</p>
       </div>
       <div class="detail-item">
-        <p class="detail-label">The interior</p>
-        <p class="detail-value">Hand-painted drawer boxes. Brass inlay trim. A private world inside a composed exterior.</p>
+        <p class="detail-label" id="txt-her-detail-3-label">The interior</p>
+        <p class="detail-value" id="txt-her-detail-3-value">Hand-painted drawer boxes. Brass inlay trim. A private world inside a composed exterior.</p>
       </div>
     </div>
   </div>
@@ -317,7 +317,8 @@
 
   <script>
     fetch('/_content/her-console.json').then(function(r){return r.json();}).then(function(d){
-      var map = {
+      // Images
+      var imgMap = {
         'img-her-hero': d.hero_image,
         'img-her-1':    d.photo_1,
         'img-her-2':    d.photo_2,
@@ -331,10 +332,34 @@
         'img-her-10':   d.photo_10,
         'img-her-11':   d.photo_11
       };
-      Object.keys(map).forEach(function(id){
+      Object.keys(imgMap).forEach(function(id){
         var el = document.getElementById(id);
-        if(el && map[id]) el.src = map[id];
+        if(el && imgMap[id]) el.src = imgMap[id];
       });
+      // Text
+      if(d.tag) document.getElementById('txt-her-tag').textContent = d.tag;
+      if(d.title) document.getElementById('txt-her-title').textContent = d.title;
+      if(d.material) document.getElementById('txt-her-material').textContent = d.material;
+      if(d.finish) document.getElementById('txt-her-finish').textContent = d.finish;
+      if(d.feature) document.getElementById('txt-her-feature').textContent = d.feature;
+      if(d.story_label) document.getElementById('txt-her-story-label').textContent = d.story_label;
+      // Story paragraphs — rebuild from array if present
+      if(d.story && Array.isArray(d.story) && d.story.length) {
+        var container = document.getElementById('txt-her-story-container');
+        container.innerHTML = '';
+        d.story.forEach(function(para, i){
+          var p = document.createElement('p');
+          p.textContent = para;
+          container.appendChild(p);
+        });
+      }
+      // Detail callouts
+      if(d.detail_1_label) document.getElementById('txt-her-detail-1-label').textContent = d.detail_1_label;
+      if(d.detail_1_value) document.getElementById('txt-her-detail-1-value').textContent = d.detail_1_value;
+      if(d.detail_2_label) document.getElementById('txt-her-detail-2-label').textContent = d.detail_2_label;
+      if(d.detail_2_value) document.getElementById('txt-her-detail-2-value').textContent = d.detail_2_value;
+      if(d.detail_3_label) document.getElementById('txt-her-detail-3-label').textContent = d.detail_3_label;
+      if(d.detail_3_value) document.getElementById('txt-her-detail-3-value').textContent = d.detail_3_value;
     }).catch(function(){});
   </script>
 

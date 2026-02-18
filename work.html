@@ -36,7 +36,7 @@
 
   <section class="work-hero">
     <div class="container">
-      <h1>Selected<br /><em>projects.</em></h1>
+      <h1><span id="txt-work-headline">Selected</span><br /><em id="txt-work-headline-em">projects.</em></h1>
     </div>
   </section>
 
@@ -47,8 +47,8 @@
         <img id="img-work-her" src="assets/her/install/her-10.jpg" alt="HER Console" class="work-item-img" />
         <div class="work-item-overlay">
           <div class="work-item-info">
-            <h3>HER Console</h3>
-            <p>Bespoke console · Manhattan</p>
+            <h3 id="txt-her-project-name">HER Console</h3>
+            <p id="txt-her-project-label">Bespoke console · Manhattan</p>
           </div>
         </div>
       </a>
@@ -57,58 +57,58 @@
         <img id="img-work-murphy" src="assets/murphy-bed/Jenna-Hero2.jpg" alt="Murphy Bed" class="work-item-img" />
         <div class="work-item-overlay">
           <div class="work-item-info">
-            <h3>Jenna & Bobby</h3>
-            <p>Murphy bed · Brooklyn</p>
+            <h3 id="txt-murphy-project-name">Jenna & Bobby</h3>
+            <p id="txt-murphy-project-label">Murphy bed · Brooklyn</p>
           </div>
         </div>
       </a>
 
       <div class="work-item">
-        <div class="work-item-placeholder">Tribeca Credenza</div>
+        <div class="work-item-placeholder" id="txt-card-3-placeholder">Tribeca Credenza</div>
         <div class="work-item-overlay">
           <div class="work-item-info">
-            <h3>Tribeca Credenza</h3>
-            <p>Walnut · Manhattan</p>
+            <h3 id="txt-card-3-name">Tribeca Credenza</h3>
+            <p id="txt-card-3-label">Walnut · Manhattan</p>
           </div>
         </div>
       </div>
 
       <div class="work-item">
-        <div class="work-item-placeholder">Chelsea Built-in</div>
+        <div class="work-item-placeholder" id="txt-card-4-placeholder">Chelsea Built-in</div>
         <div class="work-item-overlay">
           <div class="work-item-info">
-            <h3>Chelsea Shelves</h3>
-            <p>White oak · Manhattan</p>
+            <h3 id="txt-card-4-name">Chelsea Shelves</h3>
+            <p id="txt-card-4-label">White oak · Manhattan</p>
           </div>
         </div>
       </div>
 
       <div class="work-item work-item--tall">
-        <div class="work-item-placeholder">Bar Cabinet</div>
+        <div class="work-item-placeholder" id="txt-card-5-placeholder">Bar Cabinet</div>
         <div class="work-item-overlay">
           <div class="work-item-info">
-            <h3>Custom Bar</h3>
-            <p>White oak + brass · Brooklyn</p>
+            <h3 id="txt-card-5-name">Custom Bar</h3>
+            <p id="txt-card-5-label">White oak + brass · Brooklyn</p>
           </div>
         </div>
       </div>
 
       <div class="work-item work-item--tall">
-        <div class="work-item-placeholder">Kitchen Millwork</div>
+        <div class="work-item-placeholder" id="txt-card-6-placeholder">Kitchen Millwork</div>
         <div class="work-item-overlay">
           <div class="work-item-info">
-            <h3>56 Leonard — Kitchen</h3>
-            <p>Custom cabinetry · Tribeca</p>
+            <h3 id="txt-card-6-name">56 Leonard — Kitchen</h3>
+            <p id="txt-card-6-label">Custom cabinetry · Tribeca</p>
           </div>
         </div>
       </div>
 
       <div class="work-item">
-        <div class="work-item-placeholder">Walk-in Closet</div>
+        <div class="work-item-placeholder" id="txt-card-7-placeholder">Walk-in Closet</div>
         <div class="work-item-overlay">
           <div class="work-item-info">
-            <h3>Custom Wardrobe</h3>
-            <p>White oak · Manhattan</p>
+            <h3 id="txt-card-7-name">Custom Wardrobe</h3>
+            <p id="txt-card-7-label">White oak · Manhattan</p>
           </div>
         </div>
       </div>
@@ -131,6 +131,22 @@
     fetch('/_content/work.json').then(function(r){return r.json();}).then(function(d){
       if(d.her_console_image) document.getElementById('img-work-her').src = d.her_console_image;
       if(d.murphy_bed_image) document.getElementById('img-work-murphy').src = d.murphy_bed_image;
+      if(d.page_headline) document.getElementById('txt-work-headline').textContent = d.page_headline;
+      if(d.page_headline_em) document.getElementById('txt-work-headline-em').textContent = d.page_headline_em;
+      if(d.her_project_name) { document.getElementById('txt-her-project-name').textContent = d.her_project_name; }
+      if(d.her_project_label) { document.getElementById('txt-her-project-label').textContent = d.her_project_label; }
+      if(d.murphy_project_name) { document.getElementById('txt-murphy-project-name').textContent = d.murphy_project_name; }
+      if(d.murphy_project_label) { document.getElementById('txt-murphy-project-label').textContent = d.murphy_project_label; }
+      if(d.card_3_name) { document.getElementById('txt-card-3-name').textContent = d.card_3_name; document.getElementById('txt-card-3-placeholder').textContent = d.card_3_name; }
+      if(d.card_3_label) document.getElementById('txt-card-3-label').textContent = d.card_3_label;
+      if(d.card_4_name) { document.getElementById('txt-card-4-name').textContent = d.card_4_name; document.getElementById('txt-card-4-placeholder').textContent = d.card_4_name; }
+      if(d.card_4_label) document.getElementById('txt-card-4-label').textContent = d.card_4_label;
+      if(d.card_5_name) { document.getElementById('txt-card-5-name').textContent = d.card_5_name; document.getElementById('txt-card-5-placeholder').textContent = d.card_5_name; }
+      if(d.card_5_label) document.getElementById('txt-card-5-label').textContent = d.card_5_label;
+      if(d.card_6_name) { document.getElementById('txt-card-6-name').textContent = d.card_6_name; document.getElementById('txt-card-6-placeholder').textContent = d.card_6_name; }
+      if(d.card_6_label) document.getElementById('txt-card-6-label').textContent = d.card_6_label;
+      if(d.card_7_name) { document.getElementById('txt-card-7-name').textContent = d.card_7_name; document.getElementById('txt-card-7-placeholder').textContent = d.card_7_name; }
+      if(d.card_7_label) document.getElementById('txt-card-7-label').textContent = d.card_7_label;
     }).catch(function(){});
   </script>
 </body>
