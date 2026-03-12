@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fora Office — Wewillbebirds</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .project-hero {
+      position: relative;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+    }
+    .project-hero-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+    .project-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(8,8,8,0.05) 0%, rgba(8,8,8,0.8) 100%);
+    }
+    .project-hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 0 48px 80px;
+    }
+    .project-tag {
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+    .project-hero-title {
+      font-family: var(--font-serif);
+      font-size: clamp(40px, 6vw, 72px);
+      font-weight: 400;
+      line-height: 1.05;
+      margin-bottom: 20px;
+    }
+    .project-meta {
+      display: flex;
+      gap: 40px;
+    }
+    .project-meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .project-meta-label {
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(245,242,237,0.4);
+    }
+    .project-meta-value {
+      font-size: 13px;
+      color: var(--white-dim);
+    }
+
+    .photo-grid { display: grid; gap: 3px; }
+    .photo-grid--2col { grid-template-columns: 1fr 1fr; }
+    .photo-item { overflow: hidden; background: var(--card); }
+    .photo-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s ease; }
+    .photo-item:hover img { transform: scale(1.02); }
+    .photo-item--auto { aspect-ratio: 4/3; }
+    .photo-full { width: 100%; }
+    .photo-full img { width: 100%; max-height: 85vh; object-fit: cover; display: block; }
+
+    .story-section { padding: 120px 0; }
+    .story-inner { max-width: 680px; margin: 0 auto; padding: 0 48px; }
+    .story-label {
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 40px;
+    }
+    .story-text {
+      font-family: var(--font-serif);
+      font-size: clamp(16px, 1.8vw, 20px);
+      line-height: 1.75;
+      color: var(--white-dim);
+    }
+    .story-text p { margin-bottom: 1.4em; }
+    .story-text p:last-child { margin-bottom: 0; }
+
+    .footer-nav {
+      margin-top: 160px;
+      padding: 64px 48px;
+      border-top: 1px solid rgba(245,242,237,0.08);
+    }
+    .footer-nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-nav-link {
+      font-size: 13px;
+      letter-spacing: 0.05em;
+      text-decoration: none;
+      color: var(--white-dim);
+      transition: color 0.2s ease;
+    }
+    .footer-nav-link:hover { color: var(--accent); }
+  </style>
+</head>
+<body>
+  <!-- Nav -->
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">Wewillbebirds</a>
+    <div class="nav-links">
+      <a href="work.html">Work</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="project-hero">
+    <img src="assets/images/projects/fora-office/fora-office-01.jpg" alt="Fora office shelving in Tribeca" class="project-hero-img" />
+    <div class="project-hero-overlay"></div>
+    <div class="project-hero-content">
+      <div class="project-tag">Commercial · Office</div>
+      <h1 class="project-hero-title">Fora Office</h1>
+      <div class="project-meta">
+        <div class="project-meta-item">
+          <span class="project-meta-label">Location</span>
+          <span class="project-meta-value">Tribeca, New York</span>
+        </div>
+        <div class="project-meta-item">
+          <span class="project-meta-label">Client</span>
+          <span class="project-meta-value">Fora Travel</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Story -->
+  <section class="story-section">
+    <div class="story-inner">
+      <div class="story-label">Story</div>
+      <div class="story-text">
+        <p>The pop-up closed, and we moved the bookcases to their new spot — Fora's permanent office in Tribeca. Feels good to see them keep going.</p>
+        
+        <p>Same modular shelving from the SoHo pop-up, now integrated into the office space. Exposed brick, LED underlighting, fabric backing. The units work as room dividers and display — books, travel guides, objects that tell the Fora story.</p>
+        
+        <p>When you build something temporary and it gets a second life, that says something.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Photos: Main space views -->
+  <div class="photo-grid photo-grid--2col">
+    <div class="photo-item photo-item--auto">
+      <img src="assets/images/projects/fora-office/fora-office-01.jpg" alt="Coral shelving with yellow chair and exposed brick" />
+    </div>
+    <div class="photo-item photo-item--auto">
+      <img src="assets/images/projects/fora-office/fora-office-02.jpg" alt="Full office context with LED lighting" />
+    </div>
+  </div>
+
+  <!-- Photo: Full space -->
+  <div class="photo-full">
+    <img src="assets/images/projects/fora-office/fora-office-03.jpg" alt="Wide view of office space with shelving and ceiling detail" />
+  </div>
+
+  <!-- Photo: Detail with person for scale -->
+  <div class="photo-full">
+    <img src="assets/images/projects/fora-office/fora-office-04.jpg" alt="Shelving detail showing room divider function" />
+  </div>
+
+  <!-- Footer nav -->
+  <div class="footer-nav">
+    <div class="footer-nav-inner">
+      <a href="project-fora-popup.html" class="footer-nav-link">← Previous Project</a>
+      <a href="work.html" class="footer-nav-link">Back to Work</a>
+    </div>
+  </div>
+</body>
+</html>
