@@ -82,6 +82,19 @@
     .text:nth-child(8) { transition-delay: 0.7s; }
     .text:nth-child(9) { transition-delay: 0.8s; }
     
+    /* Scroll progress indicator */
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 2px;
+      height: 0;
+      background: var(--accent);
+      z-index: 1000;
+      transition: height 0.1s ease-out;
+      opacity: 0.4;
+    }
+    
     /* Minimal bird silhouettes at bottom */
     .birds {
       margin-top: 160px;
@@ -128,6 +141,9 @@
   </style>
 </head>
 <body>
+
+  <!-- Scroll Progress -->
+  <div class="scroll-progress"></div>
 
   <!-- NAV -->
   <nav class="nav">
@@ -191,6 +207,18 @@
 
     document.querySelectorAll('.text, .birds').forEach(el => {
       observer.observe(el);
+    });
+
+    // Scroll progress indicator
+    const progressBar = document.querySelector('.scroll-progress');
+    
+    window.addEventListener('scroll', () => {
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+      const scrollTop = window.scrollY;
+      
+      const scrollPercentage = (scrollTop / (documentHeight - windowHeight)) * 100;
+      progressBar.style.height = scrollPercentage + '%';
     });
   </script>
 
