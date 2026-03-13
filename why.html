@@ -12,33 +12,17 @@
   <style>
     body {
       background: var(--black);
-      overflow-x: hidden;
     }
     
     .manifesto {
       min-height: 100vh;
       padding: 200px 48px 240px;
       background: var(--black);
-      position: relative;
-    }
-    
-    /* Subtle gradient overlay */
-    .manifesto::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 400px;
-      background: radial-gradient(circle at top center, rgba(200,169,126,0.03) 0%, transparent 70%);
-      pointer-events: none;
     }
     
     .manifesto-inner {
       max-width: 680px;
       margin: 0 auto;
-      position: relative;
-      z-index: 1;
     }
     
     .manifesto-title {
@@ -49,9 +33,6 @@
       color: var(--white);
       margin-bottom: 120px;
       letter-spacing: -0.03em;
-      opacity: 0;
-      transform: translateY(40px);
-      animation: fadeInUp 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
     
     .text {
@@ -61,198 +42,19 @@
       line-height: 1.8;
       color: var(--white-dim);
       margin-bottom: 40px;
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), 
-                  transform 1s cubic-bezier(0.16, 1, 0.3, 1);
     }
     
-    .text.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    
-    /* Stagger delay for sequential fade-ins */
-    .text:nth-child(2) { transition-delay: 0.1s; }
-    .text:nth-child(3) { transition-delay: 0.2s; }
-    .text:nth-child(4) { transition-delay: 0.3s; }
-    .text:nth-child(5) { transition-delay: 0.4s; }
-    .text:nth-child(6) { transition-delay: 0.5s; }
-    .text:nth-child(7) { transition-delay: 0.6s; }
-    .text:nth-child(8) { transition-delay: 0.7s; }
-    .text:nth-child(9) { transition-delay: 0.8s; }
-    
-    /* OPTION 1: Left vertical bar (current) */
-    .scroll-progress-left {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 2px;
-      height: 0;
-      background: var(--accent);
-      z-index: 1000;
-      transition: height 0.1s ease-out;
-      opacity: 0.4;
-      display: none;
-    }
-    
-    /* OPTION 2: Top horizontal bar */
-    .scroll-progress-top {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: var(--accent);
-      z-index: 1000;
-      transition: width 0.1s ease-out;
-      opacity: 0.4;
-      display: none;
-    }
-    
-    /* OPTION 3: Dot indicators */
-    .scroll-dots {
-      position: fixed;
-      right: 32px;
-      top: 50%;
-      transform: translateY(-50%);
-      z-index: 1000;
-      display: none;
-      flex-direction: column;
-      gap: 12px;
-    }
-    
-    .scroll-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--white-dim);
-      opacity: 0.2;
-      transition: opacity 0.3s, transform 0.3s;
-    }
-    
-    .scroll-dot.active {
-      opacity: 0.6;
-      transform: scale(1.5);
-      background: var(--accent);
-    }
-    
-    /* OPTION 4: Page count */
-    .scroll-count {
-      position: fixed;
-      bottom: 48px;
-      right: 48px;
-      font-family: var(--font-sans);
-      font-size: 13px;
-      color: var(--white-dim);
-      opacity: 0;
-      transition: opacity 0.3s;
-      z-index: 1000;
-      display: none;
-    }
-    
-    .scroll-count.visible {
-      opacity: 0.4;
-    }
-    
-    /* OPTION 5: Circular progress */
-    .scroll-circle {
-      position: fixed;
-      top: 32px;
-      right: 32px;
-      width: 32px;
-      height: 32px;
-      z-index: 1000;
-      display: none;
-    }
-    
-    .scroll-circle svg {
-      transform: rotate(-90deg);
-    }
-    
-    .scroll-circle-bg {
-      fill: none;
-      stroke: var(--white-dim);
-      stroke-width: 2;
-      opacity: 0.1;
-    }
-    
-    .scroll-circle-progress {
-      fill: none;
-      stroke: var(--accent);
-      stroke-width: 2;
-      opacity: 0.5;
-      stroke-dasharray: 94.25; /* 2 * PI * 15 */
-      stroke-dashoffset: 94.25;
-      transition: stroke-dashoffset 0.1s ease-out;
-    }
-    
-    /* Progress mode switcher */
-    .progress-switcher {
-      position: fixed;
-      bottom: 24px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(20, 20, 20, 0.8);
-      backdrop-filter: blur(10px);
-      padding: 8px 12px;
-      border-radius: 20px;
-      border: 1px solid var(--border);
-      z-index: 2000;
-      display: flex;
-      gap: 8px;
-    }
-    
-    .progress-btn {
-      font-family: var(--font-sans);
-      font-size: 11px;
-      color: var(--white-dim);
-      background: transparent;
-      border: none;
-      padding: 6px 12px;
-      border-radius: 12px;
-      cursor: pointer;
-      transition: all 0.2s;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-    
-    .progress-btn:hover {
-      color: var(--white);
-      background: rgba(200,169,126,0.1);
-    }
-    
-    .progress-btn.active {
-      color: var(--white);
-      background: var(--accent);
-    }
-    
-    /* Minimal bird silhouettes at bottom */
+    /* Flock of birds at bottom */
     .birds {
       margin-top: 160px;
       text-align: center;
-      opacity: 0;
-      transform: translateY(40px);
-      transition: opacity 1.2s ease-out, transform 1.2s ease-out;
     }
     
-    .birds.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    
-    .birds svg {
-      width: 100%;
-      max-width: 400px;
+    .birds img {
+      max-width: 100%;
       height: auto;
-      opacity: 0.08;
-    }
-    
-    @keyframes fadeInUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      opacity: 0.15;
+      filter: grayscale(100%);
     }
     
     @media (max-width: 768px) {
@@ -269,56 +71,10 @@
       .birds {
         margin-top: 100px;
       }
-      .scroll-dots {
-        right: 16px;
-      }
-      .scroll-count {
-        bottom: 32px;
-        right: 32px;
-      }
-      .progress-switcher {
-        bottom: 80px;
-        padding: 6px 8px;
-      }
-      .progress-btn {
-        font-size: 10px;
-        padding: 4px 8px;
-      }
     }
   </style>
 </head>
 <body>
-
-  <!-- OPTION 1: Left vertical -->
-  <div class="scroll-progress-left"></div>
-  
-  <!-- OPTION 2: Top horizontal -->
-  <div class="scroll-progress-top"></div>
-  
-  <!-- OPTION 3: Dot indicators -->
-  <div class="scroll-dots">
-    <div class="scroll-dot" data-index="0"></div>
-    <div class="scroll-dot" data-index="1"></div>
-    <div class="scroll-dot" data-index="2"></div>
-    <div class="scroll-dot" data-index="3"></div>
-    <div class="scroll-dot" data-index="4"></div>
-    <div class="scroll-dot" data-index="5"></div>
-    <div class="scroll-dot" data-index="6"></div>
-    <div class="scroll-dot" data-index="7"></div>
-  </div>
-  
-  <!-- OPTION 4: Page count -->
-  <div class="scroll-count">
-    <span class="current-para">1</span> / 8
-  </div>
-  
-  <!-- OPTION 5: Circular progress -->
-  <div class="scroll-circle">
-    <svg width="32" height="32" viewBox="0 0 32 32">
-      <circle class="scroll-circle-bg" cx="16" cy="16" r="15" />
-      <circle class="scroll-circle-progress" cx="16" cy="16" r="15" />
-    </svg>
-  </div>
 
   <!-- NAV -->
   <nav class="nav">
@@ -353,151 +109,11 @@
       <p class="text">Because one day impossibly close we all will be birds.</p>
       
       <div class="birds">
-        <svg viewBox="0 0 500 80" xmlns="http://www.w3.org/2000/svg">
-          <!-- Simple V-shaped bird silhouettes -->
-          <path d="M50 40 L40 25 L42 26 L50 38 L58 26 L60 25 Z" fill="currentColor"/>
-          <path d="M130 30 L120 15 L122 16 L130 28 L138 16 L140 15 Z" fill="currentColor"/>
-          <path d="M210 50 L200 35 L202 36 L210 48 L218 36 L220 35 Z" fill="currentColor"/>
-          <path d="M290 35 L280 20 L282 21 L290 33 L298 21 L300 20 Z" fill="currentColor"/>
-          <path d="M370 45 L360 30 L362 31 L370 43 L378 31 L380 30 Z" fill="currentColor"/>
-          <path d="M450 25 L440 10 L442 11 L450 23 L458 11 L460 10 Z" fill="currentColor"/>
-        </svg>
+        <img src="assets/birds-flock.jpg" alt="">
       </div>
       
     </div>
   </section>
-
-  <!-- Progress mode switcher -->
-  <div class="progress-switcher">
-    <button class="progress-btn" data-mode="none">None</button>
-    <button class="progress-btn active" data-mode="left">Left</button>
-    <button class="progress-btn" data-mode="top">Top</button>
-    <button class="progress-btn" data-mode="dots">Dots</button>
-    <button class="progress-btn" data-mode="count">Count</button>
-    <button class="progress-btn" data-mode="circle">Circle</button>
-  </div>
-
-  <script>
-    // Scroll-based fade in
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, {
-      threshold: 0.15,
-      rootMargin: '0px 0px -80px 0px'
-    });
-
-    document.querySelectorAll('.text, .birds').forEach(el => {
-      observer.observe(el);
-    });
-
-    // Progress indicators
-    const progressLeft = document.querySelector('.scroll-progress-left');
-    const progressTop = document.querySelector('.scroll-progress-top');
-    const scrollDots = document.querySelector('.scroll-dots');
-    const scrollCount = document.querySelector('.scroll-count');
-    const scrollCircle = document.querySelector('.scroll-circle');
-    const circleProgress = document.querySelector('.scroll-circle-progress');
-    const paragraphs = document.querySelectorAll('.text');
-    const dots = document.querySelectorAll('.scroll-dot');
-    const currentParaEl = document.querySelector('.current-para');
-    
-    let currentMode = 'left';
-    
-    function updateProgress() {
-      const windowHeight = window.innerHeight;
-      const documentHeight = document.documentElement.scrollHeight;
-      const scrollTop = window.scrollY;
-      
-      const scrollPercentage = (scrollTop / (documentHeight - windowHeight)) * 100;
-      
-      // Left bar
-      if (currentMode === 'left') {
-        progressLeft.style.height = scrollPercentage + '%';
-      }
-      
-      // Top bar
-      if (currentMode === 'top') {
-        progressTop.style.width = scrollPercentage + '%';
-      }
-      
-      // Dots
-      if (currentMode === 'dots') {
-        let activePara = 0;
-        paragraphs.forEach((para, index) => {
-          const rect = para.getBoundingClientRect();
-          if (rect.top < windowHeight / 2) {
-            activePara = index;
-          }
-        });
-        
-        dots.forEach((dot, index) => {
-          dot.classList.toggle('active', index === activePara);
-        });
-      }
-      
-      // Page count
-      if (currentMode === 'count') {
-        let activePara = 1;
-        paragraphs.forEach((para, index) => {
-          const rect = para.getBoundingClientRect();
-          if (rect.top < windowHeight / 2) {
-            activePara = index + 1;
-          }
-        });
-        
-        currentParaEl.textContent = activePara;
-        scrollCount.classList.toggle('visible', scrollTop > 100);
-      }
-      
-      // Circle
-      if (currentMode === 'circle') {
-        const circumference = 94.25;
-        const offset = circumference - (scrollPercentage / 100) * circumference;
-        circleProgress.style.strokeDashoffset = offset;
-      }
-    }
-    
-    function setMode(mode) {
-      currentMode = mode;
-      
-      // Hide all
-      progressLeft.style.display = 'none';
-      progressTop.style.display = 'none';
-      scrollDots.style.display = 'none';
-      scrollCount.style.display = 'none';
-      scrollCircle.style.display = 'none';
-      
-      // Show selected
-      if (mode === 'left') progressLeft.style.display = 'block';
-      if (mode === 'top') progressTop.style.display = 'block';
-      if (mode === 'dots') scrollDots.style.display = 'flex';
-      if (mode === 'count') scrollCount.style.display = 'block';
-      if (mode === 'circle') scrollCircle.style.display = 'block';
-      
-      // Update buttons
-      document.querySelectorAll('.progress-btn').forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.mode === mode);
-      });
-      
-      updateProgress();
-    }
-    
-    // Switcher buttons
-    document.querySelectorAll('.progress-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        setMode(btn.dataset.mode);
-      });
-    });
-    
-    // Initialize
-    setMode('left');
-    
-    window.addEventListener('scroll', updateProgress);
-  </script>
 
 </body>
 </html>
