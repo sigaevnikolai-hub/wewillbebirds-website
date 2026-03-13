@@ -12,17 +12,33 @@
   <style>
     body {
       background: var(--black);
+      overflow-x: hidden;
     }
     
     .manifesto {
       min-height: 100vh;
       padding: 200px 48px 240px;
       background: var(--black);
+      position: relative;
+    }
+    
+    /* Subtle gradient overlay */
+    .manifesto::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 400px;
+      background: radial-gradient(circle at top center, rgba(200,169,126,0.03) 0%, transparent 70%);
+      pointer-events: none;
     }
     
     .manifesto-inner {
       max-width: 680px;
       margin: 0 auto;
+      position: relative;
+      z-index: 1;
     }
     
     .manifesto-title {
@@ -33,6 +49,9 @@
       color: var(--white);
       margin-bottom: 120px;
       letter-spacing: -0.03em;
+      opacity: 0;
+      transform: translateY(40px);
+      animation: fadeInUp 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
     
     .text {
@@ -42,6 +61,53 @@
       line-height: 1.8;
       color: var(--white-dim);
       margin-bottom: 40px;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), 
+                  transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    
+    .text.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    /* Stagger delay for sequential fade-ins */
+    .text:nth-child(2) { transition-delay: 0.1s; }
+    .text:nth-child(3) { transition-delay: 0.2s; }
+    .text:nth-child(4) { transition-delay: 0.3s; }
+    .text:nth-child(5) { transition-delay: 0.4s; }
+    .text:nth-child(6) { transition-delay: 0.5s; }
+    .text:nth-child(7) { transition-delay: 0.6s; }
+    .text:nth-child(8) { transition-delay: 0.7s; }
+    .text:nth-child(9) { transition-delay: 0.8s; }
+    
+    /* Minimal bird silhouettes at bottom */
+    .birds {
+      margin-top: 160px;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+    }
+    
+    .birds.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .birds svg {
+      width: 100%;
+      max-width: 400px;
+      height: auto;
+      opacity: 0.08;
+    }
+    
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
     
     @media (max-width: 768px) {
@@ -54,6 +120,9 @@
       }
       .text {
         font-size: 20px;
+      }
+      .birds {
+        margin-top: 100px;
       }
     }
   </style>
@@ -92,8 +161,37 @@
       
       <p class="text">Because one day impossibly close we all will be birds.</p>
       
+      <div class="birds">
+        <svg viewBox="0 0 400 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Minimal bird silhouettes -->
+          <path d="M40 40 L35 38 L30 40 L25 38 L30 35 L35 33 L40 35 L45 33 L50 35 L55 33 L60 35 L55 38 L50 40 L45 38 Z" fill="currentColor"/>
+          <path d="M120 35 L115 33 L110 35 L105 33 L110 30 L115 28 L120 30 L125 28 L130 30 L135 28 L140 30 L135 33 L130 35 L125 33 Z" fill="currentColor"/>
+          <path d="M200 45 L195 43 L190 45 L185 43 L190 40 L195 38 L200 40 L205 38 L210 40 L215 38 L220 40 L215 43 L210 45 L205 43 Z" fill="currentColor"/>
+          <path d="M280 30 L275 28 L270 30 L265 28 L270 25 L275 23 L280 25 L285 23 L290 25 L295 23 L300 25 L295 28 L290 30 L285 28 Z" fill="currentColor"/>
+          <path d="M360 42 L355 40 L350 42 L345 40 L350 37 L355 35 L360 37 L365 35 L370 37 L375 35 L380 37 L375 40 L370 42 L365 40 Z" fill="currentColor"/>
+        </svg>
+      </div>
+      
     </div>
   </section>
+
+  <script>
+    // Scroll-based fade in
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, {
+      threshold: 0.15,
+      rootMargin: '0px 0px -80px 0px'
+    });
+
+    document.querySelectorAll('.text, .birds').forEach(el => {
+      observer.observe(el);
+    });
+  </script>
 
 </body>
 </html>
