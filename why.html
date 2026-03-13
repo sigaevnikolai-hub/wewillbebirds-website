@@ -12,82 +12,77 @@
   <style>
     .manifesto-page {
       min-height: 100vh;
-      padding: 140px 48px 120px;
+      padding: 180px 48px 160px;
       background: var(--black);
     }
     
     .manifesto-container {
-      max-width: 720px;
+      max-width: 680px;
       margin: 0 auto;
     }
     
     .manifesto-title {
       font-family: var(--font-serif);
-      font-size: clamp(32px, 5vw, 48px);
+      font-size: clamp(36px, 6vw, 64px);
       font-weight: 400;
-      line-height: 1.3;
+      line-height: 1.2;
       color: var(--white);
-      margin-bottom: 80px;
-      letter-spacing: -0.01em;
+      margin-bottom: 120px;
+      letter-spacing: -0.02em;
     }
     
-    .manifesto-section {
-      margin-bottom: 72px;
+    .manifesto-stanza {
+      margin-bottom: 88px;
     }
     
-    .manifesto-heading {
-      font-family: var(--font-sans);
-      font-size: 13px;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 24px;
+    .manifesto-stanza:last-of-type {
+      margin-bottom: 120px;
     }
     
-    .manifesto-text {
+    .manifesto-line {
       font-family: var(--font-serif);
-      font-size: clamp(18px, 2.5vw, 24px);
-      line-height: 1.7;
+      font-size: clamp(20px, 3vw, 32px);
+      line-height: 1.75;
       color: var(--white-dim);
-      margin-bottom: 16px;
+      margin-bottom: 8px;
     }
     
-    .manifesto-text em {
+    .manifesto-line.emphasis {
+      color: var(--white);
       font-style: italic;
-      color: var(--white);
     }
     
-    .manifesto-text strong {
+    .manifesto-line.strong {
+      color: var(--white);
       font-weight: 500;
-      color: var(--white);
+      margin-top: 24px;
     }
     
-    .manifesto-verse {
-      font-family: var(--font-serif);
-      font-size: clamp(18px, 2.5vw, 24px);
-      line-height: 1.9;
-      color: var(--white);
-      margin: 32px 0;
-      padding-left: 24px;
-      border-left: 1px solid var(--border);
+    .manifesto-breath {
+      height: 32px;
     }
     
-    .manifesto-closing {
+    .manifesto-close {
       font-family: var(--font-serif);
-      font-size: clamp(20px, 3vw, 28px);
+      font-size: clamp(22px, 3.5vw, 36px);
       line-height: 1.6;
       color: var(--white);
-      margin-top: 80px;
       font-style: italic;
+      text-align: center;
+      margin-top: 120px;
+      padding-top: 80px;
+      border-top: 1px solid var(--border);
     }
     
     @media (max-width: 768px) {
       .manifesto-page {
-        padding: 120px 32px 80px;
+        padding: 140px 32px 100px;
       }
-      .manifesto-section {
-        margin-bottom: 56px;
+      .manifesto-title {
+        margin-bottom: 80px;
+      }
+      .manifesto-stanza {
+        margin-bottom: 64px;
       }
     }
   </style>
@@ -99,6 +94,7 @@
     <a href="index.html" class="nav-logo"><img src="assets/logo.png" alt="Wewillbebirds" />Wewillbebirds</a>
     <div class="nav-links">
       <a href="work.html">Work</a>
+      <a href="why.html">Why</a>
       <a href="about.html">About</a>
       <a href="contact.html">Contact</a>
     </div>
@@ -110,81 +106,71 @@
       
       <h1 class="manifesto-title">We Will Be Birds</h1>
       
-      <div class="manifesto-section">
-        <p class="manifesto-heading">Right now, we are heavy</p>
-        <p class="manifesto-text">
-          Weight of work. Weight of time. Weight of responsibility. Weight of being human.
-        </p>
-        <p class="manifesto-text">
-          Trapped in obligations, in grief, in what-ifs, in fear.
-        </p>
+      <div class="manifesto-stanza">
+        <p class="manifesto-line">Right now, we are heavy.</p>
+        <p class="manifesto-line">Bound by work, by time, by all the weight of being human.</p>
+        <p class="manifesto-line">Afraid. Stuck. Carrying obligations we didn't choose</p>
+        <p class="manifesto-line">and grief we can't set down.</p>
       </div>
       
-      <div class="manifesto-section">
-        <p class="manifesto-heading">But something in us is moving</p>
-        <p class="manifesto-text">
-          Toward lightness. Toward freedom. Toward release.
-        </p>
-        <p class="manifesto-text">
-          <em>Not yet. But one day.</em>
-        </p>
-        <p class="manifesto-text">
-          This is transcendence. When death no longer terrifies you the same way. When you realize we are becoming freer than we are now.
-        </p>
+      <div class="manifesto-stanza">
+        <p class="manifesto-line">We rage against it.</p>
+        <p class="manifesto-line">We dream of escape.</p>
+        <p class="manifesto-line">We think: <span class="emphasis">what if I could be lighter?</span></p>
       </div>
       
-      <div class="manifesto-section">
-        <p class="manifesto-heading">The fear</p>
-        <p class="manifesto-text">
-          What if freedom means losing love?
-        </p>
-        <p class="manifesto-text">
-          What if being light means being empty?
-        </p>
-        <p class="manifesto-text">
-          What if I have to let go of what's real?
-        </p>
+      <div class="manifesto-stanza">
+        <p class="manifesto-line">But then the fear arrives—</p>
+        <div class="manifesto-breath"></div>
+        <p class="manifesto-line emphasis">What if freedom means losing love?</p>
+        <p class="manifesto-line emphasis">What if being light means being empty?</p>
+        <p class="manifesto-line emphasis">What if I have to let go of everything real?</p>
       </div>
       
-      <div class="manifesto-section">
-        <p class="manifesto-heading">The answer</p>
-        <p class="manifesto-text">
-          <strong>You don't.</strong>
-        </p>
-        <p class="manifesto-text">
-          Real love survives transformation. It stays with you. If it's your love, it will always be within you.
-        </p>
-        <p class="manifesto-text">
-          The bird is light, untethered, above the noise, above the weight — <strong>but it carries love.</strong>
-        </p>
-        
-        <div class="manifesto-verse">
-          Be free, but do not lose love.<br>
-          Be light, but stay open.<br>
-          Leave fear, not feeling.
-        </div>
-        
-        <p class="manifesto-text">
-          Let people feel your love. Give love to the world. Make it a better place.
-        </p>
+      <div class="manifesto-stanza">
+        <p class="manifesto-line strong">You don't.</p>
+        <div class="manifesto-breath"></div>
+        <p class="manifesto-line">Love that is real survives transformation.</p>
+        <p class="manifesto-line">If it lives in you, it will carry with you—</p>
+        <p class="manifesto-line">not as weight, but as wings.</p>
       </div>
       
-      <div class="manifesto-section">
-        <p class="manifesto-heading">We are not trapped forever</p>
-        <p class="manifesto-text">
-          We are meant for more than fear.
-        </p>
-        <p class="manifesto-text">
-          We are dreaming. <em>One day, one day.</em>
-        </p>
-        <p class="manifesto-text">
-          You're not guilty for wanting to be free.
-        </p>
+      <div class="manifesto-stanza">
+        <p class="manifesto-line">A bird is light.</p>
+        <p class="manifesto-line">Untethered. Above the noise. Above the fear.</p>
+        <p class="manifesto-line strong">But it carries love.</p>
+        <div class="manifesto-breath"></div>
+        <p class="manifesto-line">Be free, but do not lose love.</p>
+        <p class="manifesto-line">Be light, but stay open.</p>
+        <p class="manifesto-line">Leave fear—not feeling.</p>
       </div>
       
-      <p class="manifesto-closing">
+      <div class="manifesto-stanza">
+        <p class="manifesto-line">You are not guilty for wanting to be free.</p>
+        <p class="manifesto-line">You are not trapped forever.</p>
+        <p class="manifesto-line">We are meant for more than this.</p>
+      </div>
+      
+      <div class="manifesto-stanza">
+        <p class="manifesto-line">Something in us is moving toward lightness.</p>
+        <p class="manifesto-line">Toward transcendence.</p>
+        <p class="manifesto-line">Toward the moment when death no longer</p>
+        <p class="manifesto-line">terrifies us the same way.</p>
+        <div class="manifesto-breath"></div>
+        <p class="manifesto-line emphasis">Not yet.</p>
+        <p class="manifesto-line emphasis">But one day.</p>
+      </div>
+      
+      <div class="manifesto-stanza">
+        <p class="manifesto-line">Let people feel your love.</p>
+        <p class="manifesto-line">Give it to the world.</p>
+        <p class="manifesto-line">Make this place a little more beautiful</p>
+        <p class="manifesto-line">than you found it.</p>
+      </div>
+      
+      <p class="manifesto-close">
         Your life is just a sparkle.<br>
-        Soon you will be free.
+        Soon, you will be free.
       </p>
       
     </div>
