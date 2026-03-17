@@ -83,108 +83,6 @@ img, video { display: block; max-width: 100%; }
 
 .nav-links a:hover { color: var(--white); }
 
-/* ── MOBILE BURGER MENU ── */
-.burger-menu {
-  display: none;
-  flex-direction: column;
-  gap: 5px;
-  width: 28px;
-  height: 24px;
-  cursor: pointer;
-  z-index: 101;
-}
-
-.burger-line {
-  width: 100%;
-  height: 2px;
-  background: var(--white);
-  transition: all 0.3s ease;
-}
-
-/* Mobile Navigation Slide-in */
-.mobile-nav {
-  position: fixed;
-  top: 0;
-  right: -100%;
-  width: 280px;
-  height: 100vh;
-  background: var(--surface);
-  border-left: 1px solid var(--border);
-  z-index: 200;
-  transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  display: flex;
-  flex-direction: column;
-}
-
-.mobile-nav--open {
-  right: 0;
-}
-
-.mobile-nav-header {
-  display: flex;
-  justify-content: flex-end;
-  padding: 28px 24px;
-  border-bottom: 1px solid var(--border);
-}
-
-.mobile-nav-close {
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  color: var(--white-dim);
-  font-size: 24px;
-  font-weight: 300;
-  transition: color 0.2s;
-}
-
-.mobile-nav-close:hover {
-  color: var(--white);
-}
-
-.mobile-nav-links {
-  display: flex;
-  flex-direction: column;
-  padding: 40px 0;
-}
-
-.mobile-nav-links a {
-  padding: 18px 32px;
-  font-size: 16px;
-  font-weight: 400;
-  letter-spacing: 0.04em;
-  color: var(--white-dim);
-  border-bottom: 1px solid var(--border);
-  transition: all 0.2s;
-}
-
-.mobile-nav-links a:hover {
-  color: var(--white);
-  background: rgba(255,255,255,0.02);
-  padding-left: 40px;
-}
-
-.mobile-nav-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(8,8,8,0.85);
-  backdrop-filter: blur(4px);
-  z-index: 199;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.4s ease;
-}
-
-.mobile-nav--open ~ .mobile-nav-overlay {
-  opacity: 1;
-  pointer-events: all;
-}
-
 /* ── HERO ── */
 .hero {
   position: relative;
@@ -486,9 +384,8 @@ img, video { display: block; max-width: 100%; }
   .footer-inner { flex-direction: column; gap: 20px; text-align: center; }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 600px) {
   .nav-links { display: none; }
-  .burger-menu { display: flex; }
   .services-grid { grid-template-columns: 1fr; }
   .hero-headline { font-size: 40px; }
 }

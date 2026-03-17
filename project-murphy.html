@@ -163,7 +163,6 @@
     .project-nav-back:hover { color: var(--white); }
 
     @media (max-width: 768px) {
-      .project-nav-back { display: none; }
       .project-hero-content { padding: 0 24px 60px; }
       .project-meta { gap: 24px; flex-wrap: wrap; }
       .photo-grid--2col, .photo-grid--3col, .photo-grid--featured { grid-template-columns: 1fr; }
@@ -179,26 +178,7 @@
       Wewillbebirds
     </a>
     <a href="work.html" class="project-nav-back">← All work</a>
-    <button id="burger-menu" class="burger-menu" aria-label="Open menu">
-      <span class="burger-line"></span>
-      <span class="burger-line"></span>
-      <span class="burger-line"></span>
-    </button>
   </nav>
-
-  <!-- MOBILE NAV -->
-  <div id="mobile-nav" class="mobile-nav">
-    <div class="mobile-nav-header">
-      <button id="mobile-nav-close" class="mobile-nav-close" aria-label="Close menu">×</button>
-    </div>
-    <div class="mobile-nav-links">
-      <a href="work.html">Work</a>
-      <a href="why.html">Why</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
-    </div>
-  </div>
-  <div id="mobile-nav-overlay" class="mobile-nav-overlay"></div>
 
   <!-- HERO -->
   <section class="project-hero">
@@ -350,7 +330,6 @@
       if(g.footer_copy) document.getElementById('txt-footer-copy').textContent = g.footer_copy;
     }).catch(function(){});
   </script>
-  <script src="mobile-nav.js"></script>
 
 </body>
 </html>
