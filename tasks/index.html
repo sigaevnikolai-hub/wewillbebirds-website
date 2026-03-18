@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nick's Tasks</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #000;
+            color: #fff;
+            padding: 20px;
+            padding-bottom: 100px;
+        }
+        
+        .header {
+            margin-bottom: 30px;
+        }
+        
+        h1 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .date {
+            color: #888;
+            font-size: 14px;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+        }
+        
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .section-icon {
+            font-size: 24px;
+        }
+        
+        .section-title {
+            font-size: 20px;
+            font-weight: 600;
+        }
+        
+        .section-subtitle {
+            color: #888;
+            font-size: 14px;
+        }
+        
+        .task {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+            display: flex;
+            gap: 12px;
+            align-items: start;
+            border: 2px solid transparent;
+            transition: all 0.2s;
+        }
+        
+        .task.completed {
+            opacity: 0.5;
+        }
+        
+        .task.completed .task-title {
+            text-decoration: line-through;
+        }
+        
+        .checkbox {
+            width: 24px;
+            height: 24px;
+            border: 2px solid #444;
+            border-radius: 50%;
+            flex-shrink: 0;
+            margin-top: 2px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .checkbox.checked {
+            background: #0a84ff;
+            border-color: #0a84ff;
+            position: relative;
+        }
+        
+        .checkbox.checked::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        .task-content {
+            flex: 1;
+        }
+        
+        .task-title {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 6px;
+        }
+        
+        .task-notes {
+            color: #888;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+        
+        .urgent .task {
+            border-color: #ff453a;
+        }
+        
+        .week .task {
+            border-color: #ffd60a;
+        }
+        
+        .systems .task {
+            border-color: #30d158;
+        }
+        
+        .future .task {
+            border-color: #64d2ff;
+        }
+        
+        .add-task {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: #0a84ff;
+            border-radius: 50%;
+            border: none;
+            color: white;
+            font-size: 32px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(10, 132, 255, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .modal.show {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: #1a1a1a;
+            border-radius: 16px;
+            padding: 24px;
+            width: 100%;
+            max-width: 500px;
+        }
+        
+        .modal-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        
+        input, textarea, select {
+            width: 100%;
+            background: #2a2a2a;
+            border: 1px solid #444;
+            border-radius: 8px;
+            padding: 12px;
+            color: white;
+            font-size: 16px;
+            margin-bottom: 12px;
+            font-family: inherit;
+        }
+        
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+        }
+        
+        button {
+            flex: 1;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        .btn-primary {
+            background: #0a84ff;
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: #2a2a2a;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Tasks</h1>
+        <div class="date" id="current-date"></div>
+    </div>
+
+    <div class="section urgent">
+        <div class="section-header">
+            <span class="section-icon">🔴</span>
+            <div>
+                <div class="section-title">Tomorrow</div>
+                <div class="section-subtitle">Thursday, March 19</div>
+            </div>
+        </div>
+        <div id="urgent-tasks"></div>
+    </div>
+
+    <div class="section week">
+        <div class="section-header">
+            <span class="section-icon">🟡</span>
+            <div>
+                <div class="section-title">This Week</div>
+                <div class="section-subtitle">By March 23</div>
+            </div>
+        </div>
+        <div id="week-tasks"></div>
+    </div>
+
+    <div class="section systems">
+        <div class="section-header">
+            <span class="section-icon">🟢</span>
+            <div>
+                <div class="section-title">Systems to Build</div>
+                <div class="section-subtitle">Ongoing projects</div>
+            </div>
+        </div>
+        <div id="systems-tasks"></div>
+    </div>
+
+    <div class="section future">
+        <div class="section-header">
+            <span class="section-icon">🔵</span>
+            <div>
+                <div class="section-title">Future</div>
+                <div class="section-subtitle">Someday</div>
+            </div>
+        </div>
+        <div id="future-tasks"></div>
+    </div>
+
+    <button class="add-task" onclick="showAddModal()">+</button>
+
+    <div class="modal" id="add-modal">
+        <div class="modal-content">
+            <div class="modal-title">Add Task</div>
+            <input type="text" id="new-task-title" placeholder="Task title">
+            <textarea id="new-task-notes" placeholder="Notes (optional)"></textarea>
+            <select id="new-task-section">
+                <option value="urgent">🔴 Tomorrow</option>
+                <option value="week">🟡 This Week</option>
+                <option value="systems">🟢 Systems</option>
+                <option value="future">🔵 Future</option>
+            </select>
+            <div class="button-group">
+                <button class="btn-secondary" onclick="hideAddModal()">Cancel</button>
+                <button class="btn-primary" onclick="addTask()">Add</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let tasks = {
+            urgent: [
+                { id: 1, title: 'COI email - Olympia Dumbo', notes: 'Waiting on corrected COI from broker. Forward to Donna Walker.', completed: false },
+                { id: 2, title: 'Reply to Janice - taxes', notes: 'Accountant email, important but not urgent', completed: false }
+            ],
+            week: [
+                { id: 3, title: 'Website - finish & A/B testing', notes: 'HIGH PRIORITY - client acquisition tool', completed: false },
+                { id: 4, title: 'Respond to new leads', notes: 'Forward to Kaleb first', completed: false },
+                { id: 5, title: 'Schedule EMG test', notes: 'Hand nerve recovery tracking', completed: false },
+                { id: 6, title: 'Fix broken tooth', notes: 'Call dentist', completed: false }
+            ],
+            systems: [
+                { id: 7, title: 'Payment tracking with Sokto', notes: 'Clear system: who pays what, income splits, expenses', completed: false },
+                { id: 8, title: 'Instagram pipeline', notes: 'Post consistently - schedule + content batches', completed: false },
+                { id: 9, title: 'Camera practice', notes: 'DSLR + DJI Osmo + Insta360 + lighting - weekly practice', completed: false },
+                { id: 10, title: 'Gym routine', notes: 'Pick 3 days, set times, block calendar', completed: false },
+                { id: 11, title: 'Morning routine', notes: 'Wake earlier, no jerking off, keep coffee', completed: false },
+                { id: 12, title: 'Food routine', notes: 'Consistent breakfast/lunch when out', completed: false }
+            ],
+            future: [
+                { id: 13, title: 'California coast trip', notes: '2 weeks in convertible - plan route, dates, rental', completed: false }
+            ]
+        };
+
+        let nextId = 14;
+
+        function saveToStorage() {
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+        }
+
+        function loadFromStorage() {
+            const stored = localStorage.getItem('tasks');
+            if (stored) {
+                tasks = JSON.parse(stored);
+                nextId = Math.max(...Object.values(tasks).flat().map(t => t.id)) + 1;
+            }
+        }
+
+        function renderTasks() {
+            ['urgent', 'week', 'systems', 'future'].forEach(section => {
+                const container = document.getElementById(`${section}-tasks`);
+                container.innerHTML = tasks[section].map(task => `
+                    <div class="task ${task.completed ? 'completed' : ''}">
+                        <div class="checkbox ${task.completed ? 'checked' : ''}" onclick="toggleTask('${section}', ${task.id})"></div>
+                        <div class="task-content">
+                            <div class="task-title">${task.title}</div>
+                            ${task.notes ? `<div class="task-notes">${task.notes}</div>` : ''}
+                        </div>
+                    </div>
+                `).join('');
+            });
+        }
+
+        function toggleTask(section, id) {
+            const task = tasks[section].find(t => t.id === id);
+            if (task) {
+                task.completed = !task.completed;
+                saveToStorage();
+                renderTasks();
+            }
+        }
+
+        function showAddModal() {
+            document.getElementById('add-modal').classList.add('show');
+        }
+
+        function hideAddModal() {
+            document.getElementById('add-modal').classList.remove('show');
+            document.getElementById('new-task-title').value = '';
+            document.getElementById('new-task-notes').value = '';
+        }
+
+        function addTask() {
+            const title = document.getElementById('new-task-title').value.trim();
+            if (!title) return;
+
+            const notes = document.getElementById('new-task-notes').value.trim();
+            const section = document.getElementById('new-task-section').value;
+
+            tasks[section].push({
+                id: nextId++,
+                title,
+                notes,
+                completed: false
+            });
+
+            saveToStorage();
+            renderTasks();
+            hideAddModal();
+        }
+
+        function updateDate() {
+            const now = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('current-date').textContent = now.toLocaleDateString('en-US', options);
+        }
+
+        loadFromStorage();
+        renderTasks();
+        updateDate();
+    </script>
+</body>
+</html>
