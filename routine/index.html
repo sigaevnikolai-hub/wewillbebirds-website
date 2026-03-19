@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nick's System</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #000;
+            color: #fff;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #333;
+        }
+        
+        h1 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .date {
+            color: #888;
+            font-size: 16px;
+        }
+        
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+        }
+        
+        .tab {
+            padding: 12px 24px;
+            background: #1a1a1a;
+            border: none;
+            border-radius: 8px;
+            color: #888;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s;
+        }
+        
+        .tab.active {
+            background: #0a84ff;
+            color: white;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .schedule-block {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid #0a84ff;
+        }
+        
+        .schedule-block.urgent {
+            border-left-color: #ff453a;
+        }
+        
+        .schedule-block.deep-work {
+            border-left-color: #30d158;
+        }
+        
+        .schedule-block.business-ops {
+            border-left-color: #ffd60a;
+        }
+        
+        .schedule-block.gym {
+            border-left-color: #bf5af2;
+        }
+        
+        .schedule-block.completed {
+            opacity: 0.5;
+        }
+        
+        .time {
+            color: #888;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .block-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .block-description {
+            color: #aaa;
+            font-size: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .block-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .btn-complete {
+            background: #30d158;
+            color: white;
+        }
+        
+        .btn-skip {
+            background: #2a2a2a;
+            color: #888;
+        }
+        
+        .system-card {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .system-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .system-description {
+            color: #aaa;
+            margin-bottom: 15px;
+        }
+        
+        .system-status {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .status-active {
+            background: #30d15820;
+            color: #30d158;
+        }
+        
+        .status-building {
+            background: #ffd60a20;
+            color: #ffd60a;
+        }
+        
+        .status-planned {
+            background: #88888820;
+            color: #888;
+        }
+        
+        .week-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .day-card {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 20px;
+        }
+        
+        .day-name {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .day-focus {
+            color: #0a84ff;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .day-blocks {
+            font-size: 14px;
+            color: #aaa;
+            line-height: 1.8;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            color: #888;
+            font-size: 14px;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 28px;
+            }
+            
+            .week-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>The System</h1>
+            <div class="date" id="current-date"></div>
+        </div>
+
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('today')">Today</button>
+            <button class="tab" onclick="showTab('week')">This Week</button>
+            <button class="tab" onclick="showTab('systems')">Systems</button>
+            <button class="tab" onclick="showTab('progress')">Progress</button>
+        </div>
+
+        <!-- TODAY TAB -->
+        <div id="today-tab" class="tab-content active">
+            <div id="today-schedule"></div>
+        </div>
+
+        <!-- WEEK TAB -->
+        <div id="week-tab" class="tab-content">
+            <h2 style="margin-bottom: 20px;">Weekly Pattern</h2>
+            <div class="week-grid">
+                <div class="day-card">
+                    <div class="day-name">Monday</div>
+                    <div class="day-focus">📸 Instagram Day</div>
+                    <div class="day-blocks">
+                        9:00-10:30 Urgent Block<br>
+                        10:30-4:00 Deep Work<br>
+                        <strong>4:00-5:00 Instagram Batch</strong>
+                    </div>
+                </div>
+                
+                <div class="day-card">
+                    <div class="day-name">Tuesday</div>
+                    <div class="day-focus">🛠️ Systems Day</div>
+                    <div class="day-blocks">
+                        9:00-10:30 Urgent Block<br>
+                        10:30-4:00 Deep Work<br>
+                        <strong>4:00-5:00 Build Systems</strong><br>
+                        5:00-6:00 💪 Gym
+                    </div>
+                </div>
+                
+                <div class="day-card">
+                    <div class="day-name">Wednesday</div>
+                    <div class="day-focus">📷 Camera Day</div>
+                    <div class="day-blocks">
+                        9:00-10:30 Urgent Block<br>
+                        10:30-4:00 Deep Work<br>
+                        <strong>4:00-5:00 Camera Practice</strong>
+                    </div>
+                </div>
+                
+                <div class="day-card">
+                    <div class="day-name">Thursday</div>
+                    <div class="day-focus">📧 Leads Day</div>
+                    <div class="day-blocks">
+                        9:00-10:30 Urgent Block<br>
+                        10:30-4:00 Deep Work<br>
+                        <strong>4:00-5:00 Lead Follow-up</strong><br>
+                        5:00-6:00 💪 Gym
+                    </div>
+                </div>
+                
+                <div class="day-card">
+                    <div class="day-name">Friday</div>
+                    <div class="day-focus">📊 Review Day</div>
+                    <div class="day-blocks">
+                        9:00-10:30 Urgent Block<br>
+                        10:30-4:00 Deep Work<br>
+                        <strong>4:00-5:00 Weekly Review</strong>
+                    </div>
+                </div>
+                
+                <div class="day-card">
+                    <div class="day-name">Saturday</div>
+                    <div class="day-focus">💪 Gym + Errands</div>
+                    <div class="day-blocks">
+                        Morning: Gym<br>
+                        Afternoon: Appointments<br>
+                        (Dentist, EMG, etc.)
+                    </div>
+                </div>
+                
+                <div class="day-card">
+                    <div class="day-name">Sunday</div>
+                    <div class="day-focus">🧘 Rest Day</div>
+                    <div class="day-blocks">
+                        Meal prep<br>
+                        Light admin<br>
+                        Review next week
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SYSTEMS TAB -->
+        <div id="systems-tab" class="tab-content">
+            <h2 style="margin-bottom: 20px;">Systems Being Built</h2>
+            
+            <div class="system-card">
+                <div class="system-title">Morning Routine</div>
+                <div class="system-description">
+                    7:00 AM wake → Coffee/bathroom hour → Breakfast → Start work at 9 AM<br>
+                    No phone until 8:45 AM, no jerking off in morning
+                </div>
+                <span class="system-status status-active">Starting Tomorrow</span>
+            </div>
+            
+            <div class="system-card">
+                <div class="system-title">Payment Tracker</div>
+                <div class="system-description">
+                    Google Sheet for income, expenses, and split calculation with Sokto<br>
+                    Build session: Tuesday March 25, 4-5 PM
+                </div>
+                <span class="system-status status-building">Building Week 1</span>
+            </div>
+            
+            <div class="system-card">
+                <div class="system-title">Instagram Pipeline</div>
+                <div class="system-description">
+                    Every Monday 4-5 PM: Batch 3-4 posts for the week<br>
+                    Gather → Select → Edit → Caption → Schedule
+                </div>
+                <span class="system-status status-active">Starting Monday</span>
+            </div>
+            
+            <div class="system-card">
+                <div class="system-title">Gym Routine</div>
+                <div class="system-description">
+                    Tue/Thu/Sat 5-6 PM at Crunch FiDi<br>
+                    Simple full-body strength routine
+                </div>
+                <span class="system-status status-active">Starting Tomorrow</span>
+            </div>
+            
+            <div class="system-card">
+                <div class="system-title">Camera Skills</div>
+                <div class="system-description">
+                    Every Wednesday 4-5 PM: Practice with DSLR, DJI Osmo, Insta360<br>
+                    Better project photos
+                </div>
+                <span class="system-status status-active">Starting Next Week</span>
+            </div>
+            
+            <div class="system-card">
+                <div class="system-title">Food Routine</div>
+                <div class="system-description">
+                    Standard breakfast/lunch options defined<br>
+                    Prepared ahead, no decision fatigue
+                </div>
+                <span class="system-status status-planned">Week 4</span>
+            </div>
+        </div>
+
+        <!-- PROGRESS TAB -->
+        <div id="progress-tab" class="tab-content">
+            <h2 style="margin-bottom: 20px;">Week 1 Progress</h2>
+            
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-value" id="stat-gym">0/3</div>
+                    <div class="stat-label">Gym Sessions</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="stat-urgent">0/5</div>
+                    <div class="stat-label">Urgent Blocks</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="stat-wake">--</div>
+                    <div class="stat-label">Avg Wake Time</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="stat-systems">0/1</div>
+                    <div class="stat-label">Systems Built</div>
+                </div>
+            </div>
+
+            <h3 style="margin-bottom: 15px;">This Week's Focus</h3>
+            
+            <div class="system-card">
+                <div class="system-title">✅ Thursday March 19</div>
+                <div class="day-blocks">
+                    <input type="checkbox" id="thu-urgent"> 9:00-10:30 Urgent (COI + Janice)<br>
+                    <input type="checkbox" id="thu-deep"> 10:30-4:00 Deep Work<br>
+                    <input type="checkbox" id="thu-leads"> 4:00-5:00 Lead Follow-up<br>
+                    <input type="checkbox" id="thu-gym"> 5:00-6:00 Gym
+                </div>
+            </div>
+            
+            <div class="system-card">
+                <div class="system-title">Friday March 20</div>
+                <div class="day-blocks">
+                    <input type="checkbox" id="fri-urgent"> 9:00-10:30 Urgent Block<br>
+                    <input type="checkbox" id="fri-deep"> 10:30-4:00 Deep Work<br>
+                    <input type="checkbox" id="fri-review"> 4:00-5:00 Weekly Review
+                </div>
+            </div>
+            
+            <div class="system-card">
+                <div class="system-title">Saturday March 21</div>
+                <div class="day-blocks">
+                    <input type="checkbox" id="sat-gym"> Morning Gym<br>
+                    <input type="checkbox" id="sat-appt"> Afternoon Appointments
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const schedules = {
+            'Thursday': [
+                { time: '7:00-9:00 AM', title: '🌅 Morning Routine', desc: 'Wake at 7, coffee/bathroom, breakfast, prep', type: 'morning' },
+                { time: '9:00-10:30 AM', title: '🔴 URGENT BLOCK', desc: 'COI email + Janice tax reply', type: 'urgent' },
+                { time: '10:30-12:30 PM', title: '🔨 Deep Work', desc: 'Active project work', type: 'deep-work' },
+                { time: '12:30-1:00 PM', title: '🍽️ Lunch + Admin', desc: 'Eat + quick check-in', type: 'break' },
+                { time: '1:00-4:00 PM', title: '🔨 Deep Work', desc: 'Continue project', type: 'deep-work' },
+                { time: '4:00-5:00 PM', title: '📧 Lead Follow-up', desc: 'Thursday focus: respond to leads', type: 'business-ops' },
+                { time: '5:00-6:00 PM', title: '💪 GYM', desc: 'Crunch FiDi - Full body routine', type: 'gym' }
+            ],
+            'Friday': [
+                { time: '7:00-9:00 AM', title: '🌅 Morning Routine', desc: 'Wake, coffee, breakfast', type: 'morning' },
+                { time: '9:00-10:30 AM', title: '🔴 URGENT BLOCK', desc: 'New leads + urgent emails', type: 'urgent' },
+                { time: '10:30-12:30 PM', title: '🔨 Deep Work', desc: 'Active project', type: 'deep-work' },
+                { time: '12:30-1:00 PM', title: '🍽️ Lunch + Admin', desc: 'Eat + check-in', type: 'break' },
+                { time: '1:00-4:00 PM', title: '🔨 Deep Work', desc: 'Continue project', type: 'deep-work' },
+                { time: '4:00-5:00 PM', title: '📊 Weekly Review', desc: 'What got done? Plan next week', type: 'business-ops' }
+            ],
+            'Saturday': [
+                { time: 'Morning', title: '💪 GYM', desc: 'Crunch - Full body routine', type: 'gym' },
+                { time: 'Afternoon', title: '🏥 Appointments', desc: 'EMG? Dentist? Errands', type: 'appointments' }
+            ],
+            'Sunday': [
+                { time: 'All Day', title: '🧘 REST DAY', desc: 'Meal prep, light admin, review week', type: 'rest' }
+            ],
+            'Monday': [
+                { time: '7:00-9:00 AM', title: '🌅 Morning Routine', desc: 'Wake, coffee, breakfast', type: 'morning' },
+                { time: '9:00-10:30 AM', title: '🔴 URGENT BLOCK', desc: 'Leads + emails', type: 'urgent' },
+                { time: '10:30-12:30 PM', title: '🔨 Deep Work', desc: 'Project work', type: 'deep-work' },
+                { time: '12:30-1:00 PM', title: '🍽️ Lunch + Admin', desc: 'Eat + check-in', type: 'break' },
+                { time: '1:00-4:00 PM', title: '🔨 Deep Work', desc: 'Continue project', type: 'deep-work' },
+                { time: '4:00-5:00 PM', title: '📸 Instagram Batch', desc: 'Monday focus: content for week', type: 'business-ops' }
+            ],
+            'Tuesday': [
+                { time: '7:00-9:00 AM', title: '🌅 Morning Routine', desc: 'Wake, coffee, breakfast', type: 'morning' },
+                { time: '9:00-10:30 AM', title: '🔴 URGENT BLOCK', desc: 'Leads + emails', type: 'urgent' },
+                { time: '10:30-12:30 PM', title: '🔨 Deep Work', desc: 'Project work', type: 'deep-work' },
+                { time: '12:30-1:00 PM', title: '🍽️ Lunch + Admin', desc: 'Eat + check-in', type: 'break' },
+                { time: '1:00-4:00 PM', title: '🔨 Deep Work', desc: 'Continue project', type: 'deep-work' },
+                { time: '4:00-5:00 PM', title: '🛠️ Build Systems', desc: 'Tuesday: Payment tracker setup', type: 'business-ops' },
+                { time: '5:00-6:00 PM', title: '💪 GYM', desc: 'Crunch FiDi', type: 'gym' }
+            ],
+            'Wednesday': [
+                { time: '7:00-9:00 AM', title: '🌅 Morning Routine', desc: 'Wake, coffee, breakfast', type: 'morning' },
+                { time: '9:00-10:30 AM', title: '🔴 URGENT BLOCK', desc: 'Leads + emails', type: 'urgent' },
+                { time: '10:30-12:30 PM', title: '🔨 Deep Work', desc: 'Project work', type: 'deep-work' },
+                { time: '12:30-1:00 PM', title: '🍽️ Lunch + Admin', desc: 'Eat + check-in', type: 'break' },
+                { time: '1:00-4:00 PM', title: '🔨 Deep Work', desc: 'Continue project', type: 'deep-work' },
+                { time: '4:00-5:00 PM', title: '📷 Camera Practice', desc: 'Wednesday: DSLR/DJI/Insta360', type: 'business-ops' }
+            ]
+        };
+
+        function getDayName() {
+            const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            return days[new Date().getDay()];
+        }
+
+        function updateDate() {
+            const now = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('current-date').textContent = now.toLocaleDateString('en-US', options);
+        }
+
+        function renderTodaySchedule() {
+            const dayName = getDayName();
+            const todaySchedule = schedules[dayName] || [];
+            const container = document.getElementById('today-schedule');
+            
+            if (todaySchedule.length === 0) {
+                container.innerHTML = '<div class="system-card">No schedule for today</div>';
+                return;
+            }
+
+            container.innerHTML = todaySchedule.map((block, index) => `
+                <div class="schedule-block ${block.type}" id="block-${index}">
+                    <div class="time">${block.time}</div>
+                    <div class="block-title">${block.title}</div>
+                    <div class="block-description">${block.desc}</div>
+                    <div class="block-actions">
+                        <button class="btn btn-complete" onclick="completeBlock(${index})">✓ Done</button>
+                        <button class="btn btn-skip" onclick="skipBlock(${index})">Skip</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function completeBlock(index) {
+            const block = document.getElementById(`block-${index}`);
+            block.classList.add('completed');
+            block.querySelector('.btn-complete').textContent = '✓ Completed';
+            block.querySelector('.btn-complete').disabled = true;
+            block.querySelector('.btn-skip').style.display = 'none';
+            saveProgress();
+        }
+
+        function skipBlock(index) {
+            const block = document.getElementById(`block-${index}`);
+            block.style.opacity = '0.3';
+            saveProgress();
+        }
+
+        function saveProgress() {
+            // Save to localStorage
+            const progress = {
+                date: new Date().toDateString(),
+                completed: Array.from(document.querySelectorAll('.schedule-block.completed')).length
+            };
+            localStorage.setItem('dailyProgress', JSON.stringify(progress));
+        }
+
+        function showTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            
+            // Show selected tab
+            document.getElementById(`${tabName}-tab`).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        updateDate();
+        renderTodaySchedule();
+    </script>
+</body>
+</html>
